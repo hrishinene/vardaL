@@ -1,5 +1,7 @@
 import {KeyValue} from '../../lib/keyboard'
 import {getStatuses} from '../../lib/statuses'
+import {CharStatus2} from '../../lib/statuses'
+import {KeyVal} from '../../lib/statuses'
 import {Key} from './Key'
 import {useEffect} from 'react'
 import {ENTER_TEXT, DELETE_TEXT} from '../../constants/strings'
@@ -10,10 +12,10 @@ type Props = {
     onEnter: () => void
     guesses: string[]
 }
-
 export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
-    const charStatuses = getStatuses(guesses)
-    console.log("<HVN>charStatuses = ", charStatuses);
+    const charStatuses:{ [key: string]: CharStatus2 }  = getStatuses(guesses)
+
+    console.log("<HVN>charStatuses = ", JSON.stringify(charStatuses));
 
     const onClick = (value: KeyValue) => {
         if (value === 'ENTER') {
@@ -50,47 +52,47 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
                 <Key width={60.4} value="ENTER" onClick={onClick}>
                     {ENTER_TEXT}
                 </Key>
-                <Key value="अ" onClick={onClick} status={charStatuses['अ']}/>
-                <Key value="आ" onClick={onClick} status={charStatuses['आ']}/>
-                <Key value="ई" onClick={onClick} status={charStatuses['ई']}/>
-                <Key value="क" onClick={onClick} status={charStatuses['क']}/>
-                <Key value="ख" onClick={onClick} status={charStatuses['ख']}/>
-                <Key value="ग" onClick={onClick} status={charStatuses['ग']}/>
-                <Key value="घ" onClick={onClick} status={charStatuses['घ']}/>
-                <Key value="च" onClick={onClick} status={charStatuses['च']}/>
-                <Key value="ज" onClick={onClick} status={charStatuses['ज']}/>
+<Key value={KeyVal(charStatuses, "अ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'अ').status}/>
+<Key value={KeyVal(charStatuses, "आ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'आ').status}/>
+<Key value={KeyVal(charStatuses, "ई").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ई').status}/>
+<Key value={KeyVal(charStatuses, "क").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'क').status}/>
+<Key value={KeyVal(charStatuses, "ख").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ख').status}/>
+<Key value={KeyVal(charStatuses, "ग").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ग').status}/>
+<Key value={KeyVal(charStatuses, "घ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'घ').status}/>
+<Key value={KeyVal(charStatuses, "च").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'च').status}/>
+<Key value={KeyVal(charStatuses, "ज").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ज').status}/>
                 <Key width={60.4} value="DELETE" onClick={onClick}>
                     {DELETE_TEXT}
                 </Key>
             </div>
             <div className="flex justify-center mb-1">
-                <Key value="झ" onClick={onClick} status={charStatuses['झ']}/>
-                <Key value="ट" onClick={onClick} status={charStatuses['ट']}/>
-                <Key value="ठ" onClick={onClick} status={charStatuses['ठ']}/>
-                <Key value="ड" onClick={onClick} status={charStatuses['ड']}/>
-                <Key value="ढ" onClick={onClick} status={charStatuses['ढ']}/>
-                <Key value="ण" onClick={onClick} status={charStatuses['ण']}/>
-                <Key value="त" onClick={onClick} status={charStatuses['त']}/>
-                <Key value="थ" onClick={onClick} status={charStatuses['थ']}/>
-                <Key value="द" onClick={onClick} status={charStatuses['द']}/>
-                <Key value="ध" onClick={onClick} status={charStatuses['ध']}/>
-                <Key value="न" onClick={onClick} status={charStatuses['न']}/>
-                <Key value="प" onClick={onClick} status={charStatuses['प']}/>
-                <Key value="फ" onClick={onClick} status={charStatuses['फ']}/>
+<Key value={KeyVal(charStatuses, "झ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'झ').status}/>
+<Key value={KeyVal(charStatuses, "ट").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ट').status}/>
+<Key value={KeyVal(charStatuses, "ठ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ठ').status}/>
+<Key value={KeyVal(charStatuses, "ड").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ड').status}/>
+<Key value={KeyVal(charStatuses, "ढ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ढ').status}/>
+<Key value={KeyVal(charStatuses, "ण").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ण').status}/>
+<Key value={KeyVal(charStatuses, "त").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'त').status}/>
+<Key value={KeyVal(charStatuses, "थ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'थ').status}/>
+<Key value={KeyVal(charStatuses, "द").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'द').status}/>
+<Key value={KeyVal(charStatuses, "ध").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ध').status}/>
+<Key value={KeyVal(charStatuses, "न").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'न').status}/>
+<Key value={KeyVal(charStatuses, "प").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'प').status}/>
+<Key value={KeyVal(charStatuses, "फ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'फ').status}/>
             </div>
             <div className="flex justify-center">
-                <Key value="ब" onClick={onClick} status={charStatuses['ब']}/>
-                <Key value="भ" onClick={onClick} status={charStatuses['भ']}/>
-                <Key value="म" onClick={onClick} status={charStatuses['म']}/>
-                <Key value="य" onClick={onClick} status={charStatuses['य']}/>
-                <Key value="र" onClick={onClick} status={charStatuses['र']}/>
-                <Key value="ल" onClick={onClick} status={charStatuses['ल']}/>
-                <Key value="व" onClick={onClick} status={charStatuses['व']}/>
-                <Key value="श" onClick={onClick} status={charStatuses['श']}/>
-                <Key value="स" onClick={onClick} status={charStatuses['स']}/>
-                <Key value="ष" onClick={onClick} status={charStatuses['ष']}/>
-                <Key value="ह" onClick={onClick} status={charStatuses['ह']}/>
-                <Key value="ळ" onClick={onClick} status={charStatuses['ळ']}/>
+<Key value={KeyVal(charStatuses, "ब").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ब').status}/>
+<Key value={KeyVal(charStatuses, "भ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'भ').status}/>
+<Key value={KeyVal(charStatuses, "म").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'म').status}/>
+<Key value={KeyVal(charStatuses, "य").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'य').status}/>
+<Key value={KeyVal(charStatuses, "र").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'र').status}/>
+<Key value={KeyVal(charStatuses, "ल").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ल').status}/>
+<Key value={KeyVal(charStatuses, "व").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'व').status}/>
+<Key value={KeyVal(charStatuses, "श").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'श').status}/>
+<Key value={KeyVal(charStatuses, "स").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'स').status}/>
+<Key value={KeyVal(charStatuses, "ष").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ष').status}/>
+<Key value={KeyVal(charStatuses, "ह").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ह').status}/>
+<Key value={KeyVal(charStatuses, "ळ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ळ').status}/>
             </div>
         </div>
     )

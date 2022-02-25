@@ -1,16 +1,18 @@
 import {WORDS} from '../constants/wordlist'
 import {VALIDGUESSES} from '../constants/validGuesses'
 import {RANDOM_DATE} from "../constants/settings";
+import {unicodeMatch} from "./statuses";
 
 export const isWordInWordList = (word: string) => {
     return (
+        true ||
         WORDS.includes(word.toLowerCase()) ||
         VALIDGUESSES.includes(word.toLowerCase())
     )
 }
 
 export const isWinningWord = (word: string) => {
-    return solution === word
+    return unicodeMatch(solution, word);
 }
 
 const epoch = new Date('January 1, 2022 00:00:00');

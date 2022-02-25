@@ -1,4 +1,4 @@
-import { solution } from './words'
+import { solution, solutionIndex } from './words'
 
 export type CharStatus = 'absent' | 'present' | 'correct'
 
@@ -70,7 +70,26 @@ export const AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x09
 export type CharForm = {chr : CharValue, chrForm:string};
 export type CharStatus2 = {chrForm : CharForm, status:CharStatus};
 
-export function getAkshars(shabda:string) {
+export function unicodeMatch(src:string, tgt:string) : boolean {
+  var srcAkshare:CharForm[] = getAkshars(src);
+  var tgtAkshare:CharForm[] = getAkshars(tgt);
+  if (srcAkshare.length !== tgtAkshare.length) return false;
+
+  for (var i =0; i < srcAkshare.length; i++ ) {
+    if (srcAkshare[i].chr !== tgtAkshare[i].chr) return false;    
+  }
+  return true;
+}
+
+export function getShabda( akshars: CharForm[]) : string {
+  let retval:string = "";
+  akshars.forEach((val:CharForm) => {
+  retval = retval.concat(val.chrForm);
+  })
+  return retval;
+}
+
+export function getAkshars(shabda:string) : CharForm[] {
   let akshars:CharForm[] = [];
   let ch:CharValue = '-'; // use constant
   let form:string = "";
@@ -80,7 +99,7 @@ export function getAkshars(shabda:string) {
       let alpha = shabda.charAt(i);
       if (AllCharValues.includes(alpha.charAt(0))) {
           if (ch !== '-') {
-            console.log("Pushing ", ch, " form ", form);
+            //console.log("Pushing ", ch, " form ", form);
             let ChForm:CharForm = {chr : ch, chrForm : form};
             akshars.push(ChForm);
           }
@@ -88,12 +107,12 @@ export function getAkshars(shabda:string) {
           form = ch;
       } else if (AllSwaransh.includes(alpha.charCodeAt(0))) {
           form = form.concat(alpha.charAt(0));
-          console.log("Char ", alpha, " form ", form);
+          //console.log("Char ", alpha, " form ", form);
       } else {
-        console.log("Invalid character: ", alpha);
+        //console.log("Invalid character: ", alpha);
       }
     }
-    console.log("Pushing ", ch, " form ", form);
+    //console.log("Pushing ", ch, " form ", form);
     let ChForm:CharForm = {chr : ch, chrForm : form};
     akshars.push(ChForm);
 
@@ -110,21 +129,59 @@ export function getCharForm(ch:CharValue, str : string) {
 }
 
 // <HVN> Give a word and CharForm, match and return form and status
-export function getStatus(master:string, chrForm:CharForm) : CharStatus2 {
-  // Temporary
-  return {chrForm : {chr : "क", chrForm = "क"}, status : 'correct'};
+export function getStatus(splitSolution:CharForm[], chrForm:CharForm, indx : number) : CharStatus2 {
+  let solutionIndx:number = findIndexOf(splitSolution, chrForm);
+   console.log("Checking match: ", JSON.stringify(chrForm) );
+
+  if (solutionIndx < 0 || solutionIndx > splitSolution.length) {
+   console.log("No match: ", JSON.stringify(chrForm) );
+    return {chrForm : {chr : chrForm.chr, chrForm : chrForm.chrForm}, status : 'absent'};
+  }
+
+  if (solutionIndx === indx) {
+   console.log("Exact match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
+    return {chrForm : {chr : chrForm.chr, chrForm : splitSolution[solutionIndx].chrForm}, status : 'correct'};
+  }
+
+   console.log("Approximate match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
+  return {chrForm : {chr : chrForm.chr, chrForm : splitSolution[solutionIndx].chrForm}, status : 'present'};
+}
+
+export function findIndexOf(splitSolution:CharForm[], letter:CharForm) : number {
+  console.log("Find Index - source = ", JSON.stringify(splitSolution), " target - " , JSON.stringify(letter));
+    for (var i = 0; i < splitSolution.length; i++) {
+      let form:CharForm = splitSolution[i];
+      console.log("form.chr = ",form.chr, "letter.chr = " , letter.chr, "indx =", i);
+      if (form.chr === letter.chr) {
+          return i;
+      } 
+    }
+
+    return -1;
+}
+
+export function isIncluded(splitSolution:CharForm[], letter:CharForm) : boolean {
+  let indx:number = findIndexOf(splitSolution, letter);
+  return indx > -1 && indx < splitSolution.length;
+}
+
+export const KeyVal = (statusMap : {[key: string]: CharStatus2 }, txt:string) : CharStatus2 =>{
+    let retval : CharStatus2 = statusMap[txt];
+    if (retval) return retval;
+
+    return {chrForm:{chr : txt as CharValue, chrForm : txt}, status : 'absent'};
 }
 /** Unicode section over */
 
-export const getStatuses = (
+export const getStatuses_1 = (
   guesses: string[]
 ): { [key: string]: CharStatus } => {
   const charObj: { [key: string]: CharStatus } = {}
 
   guesses.forEach((word) => {
-    console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
+    //console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
     word.split('').forEach((letter, i) => {
-    console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
+    //console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
       if (!solution.includes(letter)) {
         // make status absent
         return (charObj[letter] ='absent');
@@ -147,7 +204,7 @@ export const getStatuses = (
 
 
 
-export const getGuessStatuses = (guess: string): CharStatus[] => {
+export const getGuessStatuses_1 = (guess: string): CharStatus[] => {
   const splitSolution = solution.split('')
   const splitGuess = guess.split('')
 
@@ -199,82 +256,62 @@ export const getGuessStatuses = (guess: string): CharStatus[] => {
  * HVN code to convert to forms
  * @param guesses 
  */
-export const getStatuses2 = (
+export const getStatuses = (
   guesses: string[]
 ): { [key: string]: CharStatus2 } => {
-  const charObj: { [key: string]: CharStatus2 } = {}
+  const charObj: { [key: string]: CharStatus2 } = {};
 
-    console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
+  console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
 
   guesses.forEach((word) => {
-    console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
+    //console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
 
-    getAkshars(word).forEach((charForm:CharForm, i:number) => 
+    getAkshars(word).forEach((charForm:CharForm, i:number) => {
       // Iterate over solution to find exact form and match
-      let stat:CharStatus2 = getStatus(solution, charForm);
-
-      if (!solution.includes(letter)) {
-        // make status absent
-        return (charObj[letter] ='absent');
-      }
-
-      if (letter === solution[i]) {
-        //make status correct
-        return (charObj[letter] = 'correct')
-      }
-
-      if (charObj[letter] !== 'correct') {
-        //make status present
-        return (charObj[letter] = 'present')
-      }
-    })
-  })
-
-  return charObj
+      return charObj[charForm.chr]=getStatus(getAkshars(solution), charForm, i);
+    });
+});
+  return charObj;
 }
 
-
-
-export const getGuessStatuses2 = (guess: string): CharStatus[] => {
-  const splitSolution = solution.split('')
-  const splitGuess = guess.split('')
+export const getGuessStatuses = (guess: string): CharStatus2[] => {
+  const splitSolution:CharForm[] = getAkshars(solution);
+  const splitGuess:CharForm[] = getAkshars(guess);
 
   const solutionCharsTaken = splitSolution.map((_) => false)
 
-  const statuses: CharStatus[] = Array.from(Array(guess.length))
+  const statuses: CharStatus2[] = Array.from(Array(guess.length))
 
-    console.log("<HVN>splitSolution = ", splitSolution);
-    console.log("<HVN>splitGuess = ", splitGuess);
+    //console.log("<HVN>splitSolution = ", JSON.stringify(splitSolution));
+    //console.log("<HVN>splitGuess = ", JSON.stringify(splitGuess));
   // handle all correct cases first
-  splitGuess.forEach((letter, i) => {
+  splitGuess.forEach((letter:CharForm, i) => {
     // console.log("<HVN>splitGuess.forEach letter = ", letter, " index = " + i);
-    if (letter === splitSolution[i]) {
-      statuses[i] = 'correct'
+    if (letter.chr === splitSolution[i].chr) {
+      statuses[i] = {chrForm:{chr : letter.chr, chrForm : splitSolution[i].chrForm}, status : 'correct'}
       solutionCharsTaken[i] = true
       return
     }
   })
 
-  splitGuess.forEach((letter, i) => {
+  splitGuess.forEach((letter:CharForm, i) => {
     if (statuses[i]) return
 
-    if (!splitSolution.includes(letter)) {
+    if (!isIncluded(splitSolution, letter)) {
       // handles the absent case
-      statuses[i] = 'absent'
+      statuses[i] = {chrForm:{chr : letter.chr, chrForm : letter.chrForm}, status : 'absent'};
       return
     }
 
     // now we are left with "present"s
-    const indexOfPresentChar = splitSolution.findIndex(
-      (x, index) => x === letter && !solutionCharsTaken[index]
-    )
+    const index =findIndexOf(splitSolution, letter);
 
-    if (indexOfPresentChar > -1) {
-      statuses[i] = 'present'
-      solutionCharsTaken[indexOfPresentChar] = true
+    if (!solutionCharsTaken[index] && index > -1) {
+      statuses[i] = {chrForm:{chr : letter.chr, chrForm : splitSolution[i].chrForm}, status : 'present'};
+      solutionCharsTaken[index] = true
       return
     } else {
-      statuses[i] = 'absent'
+      statuses[i] = {chrForm:{chr : letter.chr, chrForm : letter.chrForm}, status : 'absent'};
       return
     }
   })
@@ -282,3 +319,4 @@ export const getGuessStatuses2 = (guess: string): CharStatus[] => {
     console.log("<HVN>statuses = ", statuses);
   return statuses
 }
+

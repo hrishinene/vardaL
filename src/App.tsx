@@ -33,6 +33,7 @@ import {
   DotsVerticalIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
+import { getAkshars, CharForm, getShabda } from './lib/statuses'
 
 const ALERT_TIME_MS = 2500
 
@@ -110,38 +111,53 @@ function App() {
 
   const onChar = (value: string) => {
     if (
-      currentGuess.length < MAX_WORD_LENGTH &&
+      getAkshars(currentGuess).length < MAX_WORD_LENGTH &&
+      // currentGuess.length < MAX_WORD_LENGTH &&
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
-      setCurrentGuess(`${currentGuess}${value}`)
+      let shabda: string = getShabda(getAkshars(value))
+      setCurrentGuess(`${currentGuess}${shabda}`)
     }
   }
 
   const onDelete = () => {
-    setCurrentGuess(currentGuess.slice(0, -1))
+    let akshars = getAkshars(currentGuess)
+    setCurrentGuess(getShabda(akshars.slice(0, -1)))
+    // setCurrentGuess(currentGuess.slice(0, -1))
   }
 
   const onEnter = () => {
+    console.log('<HVN> onEnter!')
     if (isGameWon || isGameLost) {
+      console.log('<HVN> Game Won or Lost!')
       return
     }
-    if (!(currentGuess.length === MAX_WORD_LENGTH)) {
+    console.log('<HVN> onEnter further checks!')
+
+    var akshars = getAkshars(currentGuess)
+    // if (!(currentGuess.length === MAX_WORD_LENGTH)) {
+    if (!(akshars.length === MAX_WORD_LENGTH)) {
       setIsNotEnoughLetters(true)
+      console.log('<HVN> Max words check')
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
       }, ALERT_TIME_MS)
     }
+    console.log('<HVN> onEnter further checks2!')
     if (!isWordInWordList(currentGuess)) {
+      console.log('<HVN>invalid words check')
       setIsWordNotFoundAlertOpen(true)
       return setTimeout(() => {
         setIsWordNotFoundAlertOpen(false)
       }, ALERT_TIME_MS)
     }
+    console.log('<HVN> onEnter further checks2!')
 
     const winningWord = isWinningWord(currentGuess)
     if (
-      currentGuess.length === MAX_WORD_LENGTH &&
+      akshars.length === MAX_WORD_LENGTH &&
+      akshars.length === MAX_WORD_LENGTH &&
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
