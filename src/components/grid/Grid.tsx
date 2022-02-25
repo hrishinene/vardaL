@@ -15,7 +15,7 @@ export const Grid = ({ guesses, currentGuess }: Props) => {
       : []
 
   return (
-    <div className="pb-6">
+    <div>
       {guesses.map((guess, i) => (
         <CompletedRow key={i} guess={guess} />
       ))}
