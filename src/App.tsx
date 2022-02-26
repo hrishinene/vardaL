@@ -33,7 +33,7 @@ import {
   DotsVerticalIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
-import { getAkshars, CharForm, getShabda } from './lib/statuses'
+import { getAkshars, getShabda } from './lib/statuses'
 
 const ALERT_TIME_MS = 2500
 
@@ -128,31 +128,31 @@ function App() {
   }
 
   const onEnter = () => {
-    console.log('<HVN> onEnter!')
+    //console.log('<HVN> onEnter!')
     if (isGameWon || isGameLost) {
-      console.log('<HVN> Game Won or Lost!')
+      //console.log('<HVN> Game Won or Lost!')
       return
     }
-    console.log('<HVN> onEnter further checks!')
+    //console.log('<HVN> onEnter further checks!')
 
     var akshars = getAkshars(currentGuess)
     // if (!(currentGuess.length === MAX_WORD_LENGTH)) {
     if (!(akshars.length === MAX_WORD_LENGTH)) {
       setIsNotEnoughLetters(true)
-      console.log('<HVN> Max words check')
+      //console.log('<HVN> Max words check')
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
       }, ALERT_TIME_MS)
     }
-    console.log('<HVN> onEnter further checks2!')
+    //console.log('<HVN> onEnter further checks2!')
     if (!isWordInWordList(currentGuess)) {
-      console.log('<HVN>invalid words check')
+      //console.log('<HVN>invalid words check')
       setIsWordNotFoundAlertOpen(true)
       return setTimeout(() => {
         setIsWordNotFoundAlertOpen(false)
       }, ALERT_TIME_MS)
     }
-    console.log('<HVN> onEnter further checks2!')
+    //console.log('<HVN> onEnter further checks2!')
 
     const winningWord = isWinningWord(currentGuess)
     if (

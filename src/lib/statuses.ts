@@ -1,6 +1,6 @@
 import { solution, solutionIndex } from './words'
 
-export type CharStatus = 'absent' | 'present' | 'correct'
+export type CharStatus = 'absent' | 'present' | 'correct' | 'unknown'
 
 export type CharValue =
   | '-'
@@ -62,8 +62,6 @@ export type CharValue =
   | 0x094f
   | 0x0971; 
 
-export const AllCharValues =['अ', 'आ', 'ई', 'इ', 'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह', 'ळ'];
-export const AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   
   /** Unicode Util section - String utilities involving Unicode */
 // export type Akshar = {chr : CharValue, swaranshList:Swaransh[], chrForm:string};
@@ -90,6 +88,10 @@ export function getShabda( akshars: CharForm[]) : string {
 }
 
 export function getAkshars(shabda:string) : CharForm[] {
+  let AllCharValues  = ['अ', 'आ', 'ई', 'इ', 'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह', 'ळ'];
+  let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
+  console.log("Calling getAkshars");
+  console.log("initializing AllChars");
   let akshars:CharForm[] = [];
   let ch:CharValue = '-'; // use constant
   let form:string = "";
@@ -109,7 +111,7 @@ export function getAkshars(shabda:string) : CharForm[] {
           form = form.concat(alpha.charAt(0));
           //console.log("Char ", alpha, " form ", form);
       } else {
-        //console.log("Invalid character: ", alpha);
+          console.log("<HVN>Invalid character: ", alpha);
       }
     }
     //console.log("Pushing ", ch, " form ", form);
@@ -130,28 +132,27 @@ export function getCharForm(ch:CharValue, str : string) {
 
 // <HVN> Give a word and CharForm, match and return form and status
 export function getStatus(splitSolution:CharForm[], chrForm:CharForm, indx : number) : CharStatus2 {
-  let solutionIndx:number = findIndexOf(splitSolution, chrForm);
-   console.log("Checking match: ", JSON.stringify(chrForm) );
+  var solutionIndx:number = findIndexOf(splitSolution, chrForm);
+   //console.log("<HVN>Checking match: ", JSON.stringify(chrForm) );
 
   if (solutionIndx < 0 || solutionIndx > splitSolution.length) {
-   console.log("No match: ", JSON.stringify(chrForm) );
+    // console.log("<HVN>No match: ", JSON.stringify(chrForm) );
     return {chrForm : {chr : chrForm.chr, chrForm : chrForm.chrForm}, status : 'absent'};
   }
 
   if (solutionIndx === indx) {
-   console.log("Exact match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
+    // console.log("<HVN>Exact match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
     return {chrForm : {chr : chrForm.chr, chrForm : splitSolution[solutionIndx].chrForm}, status : 'correct'};
   }
 
-   console.log("Approximate match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
+  // console.log("<HVN>Approximate match: ", solutionIndex, "-", JSON.stringify(splitSolution[solutionIndx]) );
   return {chrForm : {chr : chrForm.chr, chrForm : splitSolution[solutionIndx].chrForm}, status : 'present'};
 }
 
 export function findIndexOf(splitSolution:CharForm[], letter:CharForm) : number {
-  console.log("Find Index - source = ", JSON.stringify(splitSolution), " target - " , JSON.stringify(letter));
+  // console.log("<HVN>Find Index - source = ", JSON.stringify(splitSolution), " target - " , JSON.stringify(letter));
     for (var i = 0; i < splitSolution.length; i++) {
       let form:CharForm = splitSolution[i];
-      console.log("form.chr = ",form.chr, "letter.chr = " , letter.chr, "indx =", i);
       if (form.chr === letter.chr) {
           return i;
       } 
@@ -166,10 +167,10 @@ export function isIncluded(splitSolution:CharForm[], letter:CharForm) : boolean 
 }
 
 export const KeyVal = (statusMap : {[key: string]: CharStatus2 }, txt:string) : CharStatus2 =>{
-    let retval : CharStatus2 = statusMap[txt];
+    var retval : CharStatus2 = statusMap[txt];
     if (retval) return retval;
 
-    return {chrForm:{chr : txt as CharValue, chrForm : txt}, status : 'absent'};
+    return {chrForm:{chr : txt as CharValue, chrForm : txt}, status : 'unknown' };
 }
 /** Unicode section over */
 
@@ -212,8 +213,8 @@ export const getGuessStatuses_1 = (guess: string): CharStatus[] => {
 
   const statuses: CharStatus[] = Array.from(Array(guess.length))
 
-    console.log("<HVN>splitSolution = ", splitSolution);
-    console.log("<HVN>splitGuess = ", splitGuess);
+    // console.log("<HVN>splitSolution = ", splitSolution);
+    // console.log("<HVN>splitGuess = ", splitGuess);
   // handle all correct cases first
   splitGuess.forEach((letter, i) => {
     // console.log("<HVN>splitGuess.forEach letter = ", letter, " index = " + i);
@@ -248,7 +249,7 @@ export const getGuessStatuses_1 = (guess: string): CharStatus[] => {
     }
   })
 
-    console.log("<HVN>statuses = ", statuses);
+    // console.log("<HVN>statuses = ", statuses);
   return statuses
 }
 
@@ -306,7 +307,7 @@ export const getGuessStatuses = (guess: string): CharStatus2[] => {
     // now we are left with "present"s
     const index =findIndexOf(splitSolution, letter);
 
-    if (!solutionCharsTaken[index] && index > -1) {
+    if (!solutionCharsTaken[i] && index > -1) {
       statuses[i] = {chrForm:{chr : letter.chr, chrForm : splitSolution[i].chrForm}, status : 'present'};
       solutionCharsTaken[index] = true
       return

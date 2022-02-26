@@ -1,8 +1,9 @@
 import {WORDS} from '../constants/wordlist'
 import {VALIDGUESSES} from '../constants/validGuesses'
-import {RANDOM_DATE} from "../constants/settings";
-import {unicodeMatch} from "./statuses";
+import {setMaxWords, RANDOM_DATE} from "../constants/settings";
+import {getAkshars, unicodeMatch} from "./statuses";
 
+// <HVN> Shabdak2 - suspend valid guess
 export const isWordInWordList = (word: string) => {
     return (
         true ||
@@ -38,6 +39,11 @@ export const getWordOfDay = () => {
     }
 
     let word = WORDS[picked % WORDS.length];
+
+    // Set the word length and attempts
+    var akshare = getAkshars(word);
+    setMaxWords(akshare.length);
+
     return {
         solution: word,
         solutionIndex: today,

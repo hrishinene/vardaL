@@ -1,7 +1,5 @@
 import {KeyValue} from '../../lib/keyboard'
-import {getStatuses} from '../../lib/statuses'
-import {CharStatus2} from '../../lib/statuses'
-import {KeyVal} from '../../lib/statuses'
+import {getStatuses, CharStatus2, KeyVal} from '../../lib/statuses'
 import {Key} from './Key'
 import {useEffect} from 'react'
 import {ENTER_TEXT, DELETE_TEXT} from '../../constants/strings'
@@ -80,7 +78,7 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
 <Key value={KeyVal(charStatuses, "प").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'प').status}/>
 <Key value={KeyVal(charStatuses, "फ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'फ').status}/>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-1">
 <Key value={KeyVal(charStatuses, "ब").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ब').status}/>
 <Key value={KeyVal(charStatuses, "भ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'भ').status}/>
 <Key value={KeyVal(charStatuses, "म").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'म').status}/>
