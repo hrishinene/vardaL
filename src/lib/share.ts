@@ -1,4 +1,4 @@
-import {getGuessStatuses} from './statuses'
+import {CharStatus2, getAkshars, getGuessStatuses} from './statuses'
 import {solutionIndex} from './words'
 import {GAME_TITLE, GAME_URL} from '../constants/strings'
 import {MAX_CHALLENGES} from '../constants/settings'
@@ -32,9 +32,8 @@ export const shareStatus = (guesses: string[], lost: boolean) => {
 export const generateEmojiGrid = (guesses: string[]) => {
     return guesses
         .map((guess) => {
-            const status = getGuessStatuses(guess)
-            return guess
-                .split('')
+            const status:CharStatus2[] = getGuessStatuses(guess)
+            return getAkshars(guess)
                 .map((_, i) => {
                     switch (status[i].status) {
                         case 'correct':

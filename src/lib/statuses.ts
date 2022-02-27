@@ -87,6 +87,19 @@ export function getShabda( akshars: CharForm[]) : string {
   return retval;
 }
 
+export function isRepeatAkshar(shabda : CharForm[]):boolean {
+    for (var i = 0; i < shabda.length; i++) {
+      var alpha:CharForm = shabda[i];
+
+      for (var j = i+1; j < shabda.length; j++) {
+        var beta:CharForm = shabda[j];
+        if (alpha.chr === beta.chr) return true;
+      }
+    }
+    console.log("Akshar not repeat: ", JSON.stringify(shabda) );
+    return false;
+}
+
 export function getAkshars(shabda:string) : CharForm[] {
   let AllCharValues  = ['अ', 'आ', 'ई', 'इ', 'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह', 'ळ'];
   let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];

@@ -1,15 +1,15 @@
 import {WORDS} from '../constants/wordlist'
-import {VALIDGUESSES} from '../constants/validGuesses'
+// import {VALIDGUESSES} from '../constants/validGuesses'
 import {setMaxWords, RANDOM_DATE} from "../constants/settings";
-import {getAkshars, unicodeMatch} from "./statuses";
+import {getAkshars, unicodeMatch,isRepeatAkshar} from "./statuses";
 
 // <HVN> Shabdak2 - suspend valid guess
 export const isWordInWordList = (word: string) => {
-    return (
-        true ||
-        WORDS.includes(word.toLowerCase()) ||
-        VALIDGUESSES.includes(word.toLowerCase())
-    )
+    return  (false === isRepeatAkshar(getAkshars(word)))
+    // return (
+        // WORDS.includes(word.toLowerCase()) ||
+        // VALIDGUESSES.includes(word.toLowerCase())
+    // )
 }
 
 export const isWinningWord = (word: string) => {
