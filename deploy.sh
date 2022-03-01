@@ -19,5 +19,6 @@ echo "Deploying to Google Cloud"
 gcloud app deploy --quiet
 
 echo "Deployment Done! Cleaning up!"
+cd /tmp
 rm -rf $D
 
