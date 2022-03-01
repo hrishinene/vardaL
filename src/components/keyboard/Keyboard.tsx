@@ -13,7 +13,7 @@ type Props = {
 export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
     const charStatuses:{ [key: string]: CharStatus2 }  = getStatuses(guesses)
 
-    console.log("<HVN>charStatuses = ", JSON.stringify(charStatuses));
+    // console.log("<HVN>charStatuses = ", JSON.stringify(charStatuses));
 
     const onClick = (value: KeyValue) => {
         if (value === 'ENTER') {
@@ -48,7 +48,7 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
         <div>
             <div className="flex justify-center mb-1">
                 <div>
-                <Key width={60.4} value="ENTER" onClick={onClick}>
+                <Key width={50} value="ENTER" onClick={onClick}>
                     {ENTER_TEXT}
                 </Key>
             </div>
@@ -101,7 +101,7 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
 <Key value={KeyVal(charStatuses, "ळ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ळ').status}/>
 </div>
  <div>
-<Key width={60.4} value="DELETE" onClick={onClick}>
+<Key width={50} value="DELETE" onClick={onClick}>
 {DELETE_TEXT}
 </Key>
 </div>

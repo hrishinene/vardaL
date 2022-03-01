@@ -96,15 +96,15 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
         if (alpha.chr === beta.chr) return true;
       }
     }
-    console.log("Akshar not repeat: ", JSON.stringify(shabda) );
+    // console.log("Akshar not repeat: ", JSON.stringify(shabda) );
     return false;
 }
 
 export function getAkshars(shabda:string) : CharForm[] {
   let AllCharValues  = ['अ', 'आ', 'ई', 'इ', 'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह', 'ळ'];
   let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
-  console.log("Calling getAkshars");
-  console.log("initializing AllChars");
+  // console.log("Calling getAkshars");
+  // console.log("initializing AllChars");
   let akshars:CharForm[] = [];
   let ch:CharValue = '-'; // use constant
   let form:string = "";
@@ -275,7 +275,7 @@ export const getStatuses = (
 ): { [key: string]: CharStatus2 } => {
   const charObj: { [key: string]: CharStatus2 } = {};
 
-  console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
+  // console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
 
   guesses.forEach((word) => {
     //console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
@@ -330,7 +330,7 @@ export const getGuessStatuses = (guess: string): CharStatus2[] => {
     }
   })
 
-    console.log("<HVN>statuses = ", statuses);
+    // console.log("<HVN>statuses = ", statuses);
   return statuses
 }
 
