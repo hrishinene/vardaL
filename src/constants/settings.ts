@@ -7,7 +7,7 @@ export function setMaxWords(len:number) {
     if (len > 2 && len < 6) MAX_WORD_LENGTH = len;
     switch (len) {
         case 3:
-           MAX_CHALLENGES = 8; 
+           MAX_CHALLENGES = 7; 
             break;
         case 4:
            MAX_CHALLENGES = 6; 

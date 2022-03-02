@@ -38,13 +38,14 @@ export const generateEmojiGrid = (guesses: string[]) => {
                     switch (status[i].status) {
                         case 'correct':
                             // return '🟦'
-                            return '🟩'
+                            // return '🟩'
+                            return '🟢';
                         case 'present':
                             // return '🟧'
-                            return '🟨'
+                            return '🟡';
                         default:
                             // return '⬜'
-                            return '⬛'
+                            return '⚫';
                     }
                 })
                 .join('')
