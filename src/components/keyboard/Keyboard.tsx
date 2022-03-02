@@ -51,14 +51,14 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
 <Key value={KeyVal(charStatuses, "ख").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ख').status}/>
 <Key value={KeyVal(charStatuses, "ग").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ग').status}/>
 <Key value={KeyVal(charStatuses, "घ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'घ').status}/>
-<Key width={50} value="ENTER" onClick={onClick}> {ENTER_TEXT} </Key>
+<Key value="ENTER" onClick={onClick}> {ENTER_TEXT} </Key>
 </div>
 <div className="flex justify-center mb-1">
 <Key value={KeyVal(charStatuses, "च").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'च').status}/>
 <Key value={KeyVal(charStatuses, "छ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'छ').status}/>
 <Key value={KeyVal(charStatuses, "ज").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ज').status}/>
 <Key value={KeyVal(charStatuses, "झ").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'झ').status}/>
-<Key width={50} value="DELETE" onClick={onClick}> {DELETE_TEXT} </Key>
+<Key value="DELETE" onClick={onClick}> {DELETE_TEXT} </Key>
 </div>
 <div className="flex justify-center mb-1">
 <Key value={KeyVal(charStatuses, "ट").chrForm.chrForm} onClick={onClick} status={KeyVal(charStatuses, 'ट').status}/>
