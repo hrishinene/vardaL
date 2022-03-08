@@ -1,4 +1,4 @@
-const gameStateKey = 'gameState'
+const gameStateKey = 'gameState2'
 
 type StoredGameState = {
   guesses: string[]
@@ -14,7 +14,7 @@ export const loadGameStateFromLocalStorage = () => {
   return state ? (JSON.parse(state) as StoredGameState) : null
 }
 
-const gameStatKey = 'gameStats'
+const gameStatKey = 'gameStats2'
 
 export type GameStats = {
   winDistribution: number[]

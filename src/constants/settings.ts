@@ -1,7 +1,7 @@
 export let MAX_WORD_LENGTH = 3
 export let MAX_CHALLENGES = 8
 export const RANDOM_DATE = true
-export const FORM_LINK = "https://forms.gle/itK9Co4nSAGGrnK9A"
+export const FORM_LINK = "https://forms.gle/EFjoyEsdaxk3bCpf6"
 
 export function setMaxWords(len:number) {
     if (len > 2 && len < 6) MAX_WORD_LENGTH = len;
