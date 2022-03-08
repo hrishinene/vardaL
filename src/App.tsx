@@ -19,6 +19,8 @@ import {
   NOT_ENOUGH_LETTERS_MESSAGE,
   WORD_NOT_FOUND_MESSAGE,
   CORRECT_WORD_MESSAGE,
+  BINGO_MESSAGE,
+  SOS_MESSAGE,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
@@ -35,7 +37,7 @@ import {
 } from '@heroicons/react/solid'
 import { syllables } from './lib/devStrUtils'
 
-const ALERT_TIME_MS = 2500
+const ALERT_TIME_MS = 3000
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -93,10 +95,20 @@ function App() {
   }, [guesses])
 
   useEffect(() => {
+    function getWinMessage(guesses: string[], messages: string[]) {
+      // could use unit testing, but it is pretty straightforward!
+      let glen = guesses.length
+      if (glen === 1) {
+        return BINGO_MESSAGE
+      }
+      if (glen === MAX_CHALLENGES) {
+        return SOS_MESSAGE
+      }
+      return messages[Math.floor((glen * messages.length) / MAX_CHALLENGES)]
+    }
+
     if (isGameWon) {
-      setSuccessAlert(
-        WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
-      )
+      setSuccessAlert(getWinMessage(guesses, WIN_MESSAGES))
       setTimeout(() => {
         setSuccessAlert('')
         setIsStatsModalOpen(true)
@@ -107,7 +119,7 @@ function App() {
         setIsStatsModalOpen(true)
       }, ALERT_TIME_MS)
     }
-  }, [isGameWon, isGameLost])
+  }, [isGameWon, isGameLost, guesses])
 
   const onChar = (value: string) => {
     if (
