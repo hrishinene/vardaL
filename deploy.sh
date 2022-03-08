@@ -9,6 +9,8 @@ git clone git@github.com:hrishinene/vardaL.git
 cd vardaL
 git fetch
 git checkout shabdak_2
+gcloud config set project shabdak_2
+
 
 echo "Running npm build"
 npm i
