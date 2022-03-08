@@ -3,6 +3,9 @@
 // Relies heavily on the Devanagari Block Range: 0900–097F of the Unicode standard version 14.0
 // We only use subsets of various vowels, consonants etc.
 
+export const VIRAMA = '्'; // 094D ् DEVANAGARI SIGN VIRAMA, = halant (the preferred Hindi name), suppresses inherent vowel
+export const ANUSVARA = 'ं';// 0902 ं DEVANAGARI SIGN ANUSVARA, Unicode standard denotes this as a sign, but not a vowel sign
+
 export const VOWELS = new Set([
     'अ', // 0905 अ DEVANAGARI LETTER A
     'आ', // 0906 आ DEVANAGARI LETTER AA
@@ -16,6 +19,7 @@ export const VOWELS = new Set([
     'ओ', // 0913 ओ DEVANAGARI LETTER O
     'औ', // 0914 औ DEVANAGARI LETTER AU
 ])
+
 export const CONSONANTS = new Set([
     // 'क' वर्ग
     'क', // 0915 क DEVANAGARI LETTER KA
@@ -72,16 +76,16 @@ export const SIGNS = new Set([
     'ै', // 0948 ै DEVANAGARI VOWEL SIGN AI
     'ो', // 094B ो DEVANAGARI VOWEL SIGN O
     'ौ', // 094C ौ DEVANAGARI VOWEL SIGN AU
-    'ं',// 0902 ं DEVANAGARI SIGN ANUSVARA, Unicode standard denotes this as a sign, but not a vowel sign
+    ANUSVARA
     // no visarga for now
 ])
 
-export const VIRAMA = '्'; // 094D ् DEVANAGARI SIGN VIRAMA, = halant (the preferred Hindi name), suppresses inherent vowel
-
 // In the Devanagari (when used for languages like Marathi, Hindi) a syllable is the final form of an alphabet
 // as it appears in a word. The general liberal grammar of a syllable follows (.) means concatenation:
-// syllable = vowel | consonant | consonant.sign | consonant.special | consonant.consonant | consonant.consonant.sign | consonant.consonant.special
-// This should cover a lot of words!
+// syllable =
+// vowel | vowel.anusvaara
+// consonant | consonant.sign | consonant.special | consonant.consonant | consonant.consonant.sign | consonant.consonant.special
+// This should coverTest a lot of words!
 export function syllables(s: string): string[] {
     const a = [];
     let len = s.length;
@@ -90,8 +94,13 @@ export function syllables(s: string): string[] {
     while (i < len) {
         let cur = s.charAt(i);
         if (VOWELS.has(cur)) { // is a vowel
-            a.push(cur);
-            i += 1;
+            if (i + 1 < len && s.charAt(i + 1) === ANUSVARA) { // special cases like अं, आं, इं ...
+                a.push(cur + ANUSVARA)
+                i += 2
+            } else {
+                a.push(cur);
+                i += 1;
+            }
         } else if (CONSONANTS.has(cur)) { // starts with a consonant
             if (i + 3 < len && s.charAt(i + 1) === VIRAMA && CONSONANTS.has(s.charAt(i + 2)) && (SIGNS.has(s.charAt(i + 3)))) {
                 a.push(cur + VIRAMA + s.charAt(i + 2) + s.charAt(i + 3));
@@ -102,6 +111,9 @@ export function syllables(s: string): string[] {
             } else if (i + 1 < len && (SIGNS.has(s.charAt(i + 1)))) {
                 a.push(cur + s.charAt(i + 1));
                 i += 2;
+            } else if (i + 1 < len && s.charAt(i + 1) === ANUSVARA) {
+                a.push(cur + ANUSVARA)
+                i += 2
             } else {
                 a.push(cur);
                 i += 1;

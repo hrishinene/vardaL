@@ -26,8 +26,8 @@
     "eject": "react-scripts eject",
     "fix": "prettier --write src",
     "lint": "prettier --check src",
-    "start": "react-scripts start",
-    "test": "jest",
+    "start": "react-scripts test && react-scripts start",
+    "test": "react-scripts test",
     "prepare": "husky install"
   },
   "eslintConfig": {

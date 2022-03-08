@@ -1,0 +1,1 @@
+This directory is supposed to contain a few utility scripts that can be written in any language, preferably bash.

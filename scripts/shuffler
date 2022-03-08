@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Sorts, uniqifies, and shuffles the given dictionaries. Does not change the contents other than structural changes.
+# Copyright 2022 Kedar
+
+function main() {
+  if [ $# -ne 1 ]; then
+    echo "Usage: $0 path-to-file"
+  fi
+}
+
+main "$@"
