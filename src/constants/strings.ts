@@ -6,7 +6,7 @@ export const GAME_VERSION = GitInfo().commit.shortHash || 'unknown'
 export const GAME_URL = 'shabdak.com'  // TODO #17
 export const WIN_MESSAGES = ['फारच छान, हा शब्द लगेच आला!', 'अरे वा! मस्त!', 'उत्तम, पण थोडा वेळ लागला का?']
 export const GAME_COPIED_MESSAGE = 'आता व्हॉट्सॅप् वर पेस्ट करा'
-export const ABOUT_GAME_MESSAGE = `'${GAME_TITLE}'विषयी थोडेसे ...`
+export const ABOUT_GAME_MESSAGE = `'${GAME_TITLE}' रसिकहो, नमस्कार!`
 export const NOT_ENOUGH_LETTERS_MESSAGE = `निदान ${MAX_WORD_LENGTH} तरी अक्षरं हवीत!`
 export const CORRECT_WORD_MESSAGE = (solution: string) =>
     `आजचा शब्द आहे "${solution}"! हरकत नाही, प्रयत्ने वाळूचे ...`
