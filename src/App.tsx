@@ -178,9 +178,16 @@ function App() {
 
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-8">
-        <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
+      <div>
+        <h1 className="text-3xl font-bold text-center dark:text-white">
           {GAME_TITLE}
+        </h1>
+      </div>
+      <div className="flex mx-auto items-center">
+        <h1 className="text-xl grow font-bold dark:text-white">
+          <a href="http://www.shabdak.com" className="underline font-bold">
+            शब्दक-१{' '}
+          </a>{' '}
         </h1>
         {isDarkMode ? (
           <SunIcon
@@ -202,7 +209,7 @@ function App() {
           onClick={() => setIsStatsModalOpen(true)}
         />
         <DotsVerticalIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 cursor-pointer dark:stroke-white"
           onClick={() => setIsAboutModalOpen(true)}
         />
       </div>
