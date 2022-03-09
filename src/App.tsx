@@ -21,6 +21,7 @@ import {
   CORRECT_WORD_MESSAGE,
   BINGO_MESSAGE,
   SOS_MESSAGE,
+  GAME_SUBTITLE,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
@@ -39,6 +40,8 @@ import { syllables } from './lib/devStrUtils'
 
 const ALERT_TIME_MS = 3000
 
+const aboutModalLast = 'aboutModalLast'
+
 function App() {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
@@ -47,7 +50,21 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(true)
+
+  const showAboutModalOnLoad = (): boolean => {
+    let lastDate = localStorage.getItem(aboutModalLast)
+    if (!lastDate) {
+      return true
+    }
+    let diff = Math.floor(
+      (Date.parse(new Date().toString()) - Date.parse(lastDate)) / 86400000
+    )
+    return diff > 15 // show it every 15 days or so
+  }
+
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(
+    showAboutModalOnLoad()
+  )
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
@@ -88,6 +105,10 @@ function App() {
   const handleDarkMode = (isDark: boolean) => {
     setIsDarkMode(isDark)
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  }
+  const handleAboutModalClose = () => {
+    localStorage.setItem(aboutModalLast, new Date().toString())
+    setIsAboutModalOpen(false)
   }
 
   useEffect(() => {
@@ -178,7 +199,7 @@ function App() {
     <div className="w-full absolute flex flex-col overflow-hidden h-full">
       <div className="flex w-80 mx-auto items-center mb-5">
         <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
-          {GAME_TITLE}
+          {GAME_TITLE} <span className="text-xs">{GAME_SUBTITLE}</span>
         </h1>
         {isDarkMode ? (
           <SunIcon
@@ -229,7 +250,7 @@ function App() {
       />
       <AboutModal
         isOpen={isAboutModalOpen}
-        handleClose={() => setIsAboutModalOpen(false)}
+        handleClose={() => handleAboutModalClose()}
       />
 
       {/*<button*/}

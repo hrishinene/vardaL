@@ -13,7 +13,7 @@ export const isWinningWord = (word: string) => {
     return solution === word
 }
 
-const epoch = new Date('January 1, 2022 00:00:00');
+const epoch = new Date('March 9, 2022 00:00:00');
 const epochMs = epoch.valueOf()
 
 const generateRandomPastDate = (): number => { // thanks to https://stackoverflow.com/a/60180035/437506

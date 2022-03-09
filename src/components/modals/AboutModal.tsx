@@ -17,7 +17,7 @@ export const AboutModal = ({isOpen, handleClose}: Props) => {
             </p>
             <ul className="list-disc text-gray-600 text-left list-inside">
                 <li> सोपे नियम शिका आणि खेळाचा आनंद लुटा!</li>
-                <li> यापुढे तुम्हाला एका दिवशी (फक्त) एक शब्दक खेळत येईल आणि मित्र-मैत्रिणींशी निखळ स्पर्धा करता येईल! </li>
+                <li> आता तुम्हाला एका दिवशी (फक्त) एक शब्दक खेळता येईल आणि मित्र-मैत्रिणींशी निखळ स्पर्धा करता येईल! </li>
                 <li> शब्दक तुम्हाला आवडला तर <a href="http://shabdak2.shabdak.com" className="decoration-indigo-500 decoration-2 underline"> शब्दक-२ </a>
                     आणखी आवडेल. <a className="decoration-indigo-500 underline underline-offset-1" href="http://shabdak2.shabdak.com">पहा तर खेळून</a>!</li>
             </ul>
@@ -26,7 +26,7 @@ export const AboutModal = ({isOpen, handleClose}: Props) => {
                 : "Wordle" वर आधारित एक शब्दखेळ. मराठीत तो आपल्यापर्यंत आणला आहे, केदार म्हसवडे, हृषिकेश नेने, निरंजन पेडणेकर,
                 राहुल केळकर, प्रशांत पेंडसे यांनी.
             </p>
-            <span className="text-xs text-gray-500 dark:text-gray-300">{GAME_VERSION}</span>
+            <span className="text-xs text-gray-300 dark:text-gray-100">Version: {GAME_VERSION}</span>
 
         </BaseModal>
     )
