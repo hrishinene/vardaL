@@ -184,7 +184,7 @@ function App() {
         </h1>
       </div>
       <div className="flex mx-auto items-center">
-        <h1 className="text-xl grow font-bold dark:text-white">
+        <h1 className="text-xl grow font-bold dark:text-white ml-3">
           <a href="http://www.shabdak.com" className="underline font-bold">
             शब्दक-१{' '}
           </a>{' '}
@@ -205,11 +205,11 @@ function App() {
           onClick={() => setIsInfoModalOpen(true)}
         />
         <ChartBarIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
           onClick={() => setIsStatsModalOpen(true)}
         />
         <DotsVerticalIcon
-          className="h-6 w-6 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => setIsAboutModalOpen(true)}
         />
       </div>
