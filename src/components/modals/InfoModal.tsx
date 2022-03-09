@@ -48,7 +48,7 @@ export const InfoModal = ({isOpen, handleClose}: Props) => {
                 शब्दात 'द' आहे, आणि त्याचे रूप "दि" असे आहे, पण तो या ठिकाणी नाहीये!
             </p>
             <p className="text-sm text-gray-500">
-                (म्हणजे शब्द "दिमाख", पण "कदर" किंवा दाहक नक्कीच नाही)
+                (म्हणजे शब्द "दिमाख" असू शकेल, पण "कदर" किंवा दाहक नक्कीच नाही)
             </p>
 
             <div className="flex justify-center mb-1 mt-4">
