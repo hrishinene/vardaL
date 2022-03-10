@@ -9,17 +9,18 @@ type Props = {
     isOpen: boolean
     handleClose: () => void
 
-            // <div className={`iframe-container`}>
-                // <iframe src="https://www.youtube.com/embed/BeewFNe8XRw" title="शब्दक-२'कसा खेळाल?"
-                        // frameBorder="0"
-                        // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        // allowFullScreen></iframe>
-            // </div>
 }
 
 export const InfoModal = ({isOpen, handleClose}: Props) => {
     return (
         <BaseModal title="'शब्दक-२' असा खेळा" isOpen={isOpen} handleClose={handleClose}>
+            <div className={`iframe-container`}>
+                <iframe src="https://youtu.be/gqyIjbXMlDY" title="शब्दक-२ 'कसा खेळाल?"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
+            </div>
+
             <p className="text-sm text-gray-500 dark:text-gray-300">
             <h2> काही उदाहरणे </h2>
                 एक लपलेला शब्द ओळखा! प्रत्येक प्रयात्नानंतर '{ENTER_TEXT}' कळ दाबली की घरांची
