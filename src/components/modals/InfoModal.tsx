@@ -1,6 +1,6 @@
 import {Cell} from '../grid/Cell'
 import {BaseModal} from './BaseModal'
-import {MAX_CHALLENGES} from "../../constants/settings";
+import {MARATHI_NAMES, MAX_CHALLENGES} from "../../constants/settings";
 import {MAX_WORD_LENGTH} from "../../constants/settings";
 import {ENTER_TEXT} from "../../constants/strings";
 import './ifr.css';
@@ -19,12 +19,12 @@ export const InfoModal = ({isOpen, handleClose}: Props) => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen></iframe>
             </div>
-            <h2> काही उदाहरणे </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-300">
-                एक {MAX_WORD_LENGTH}-अक्षरी शब्द {MAX_CHALLENGES} प्रयत्नांत ओळखा! प्रत्येक प्रयात्नानंतर '{ENTER_TEXT}' कळ दाबली की घरांची
+            <p className="text-gray-500 dark:text-gray-300 text-left">
+                वरील व्हीडिओत सांगितल्याप्रमाणे एक {MARATHI_NAMES[MAX_WORD_LENGTH]}-अक्षरी शब्द {MARATHI_NAMES[MAX_CHALLENGES]} प्रयत्नांत ओळखा!
+                प्रत्येक प्रयात्नानंतर '{ENTER_TEXT}' कळ दाबली की घरांची
                 पार्श्वभूमी बदलेल त्यावरून तुम्ही त्या शब्दाच्या किती जवळ आहात ते कळेल.
             </p>
-
+            <h2 className="underline"> काही उदाहरणे </h2>
             <div className="flex justify-center mb-1 mt-4">
                 <Cell value="स" status="correct"/>
                 <Cell value="व" status="absent"/>
