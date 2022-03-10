@@ -15,7 +15,7 @@ export const InfoModal = ({isOpen, handleClose}: Props) => {
     return (
         <BaseModal title="'शब्दक-२' असा खेळा" isOpen={isOpen} handleClose={handleClose}>
             <div className={`iframe-container`}>
-                <iframe src="https://youtu.be/gqyIjbXMlDY" title="शब्दक-२ 'कसा खेळाल?"
+                <iframe src="https://www.youtube.com/embed/gqyIjbXMlDY" title="शब्दक-२ 'कसा खेळाल?"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen></iframe>
