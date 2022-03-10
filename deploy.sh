@@ -19,8 +19,8 @@ npm run build
 rm -rf -v !("build"|"app.yaml")
 
 echo "Deploying to Google Cloud"
-# gcloud app deploy --quiet
-gcloud app deploy
+gcloud app deploy --quiet
+# gcloud app deploy
 
 echo "Deployment Done! Cleaning up!"
 cd /tmp

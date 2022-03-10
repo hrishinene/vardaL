@@ -20,8 +20,8 @@ type Props = {
 export const InfoModal = ({isOpen, handleClose}: Props) => {
     return (
         <BaseModal title="'शब्दक-२' असा खेळा" isOpen={isOpen} handleClose={handleClose}>
-            <h2> काही उदाहरणे </h2>
             <p className="text-sm text-gray-500 dark:text-gray-300">
+            <h2> काही उदाहरणे </h2>
                 एक लपलेला शब्द ओळखा! प्रत्येक प्रयात्नानंतर '{ENTER_TEXT}' कळ दाबली की घरांची
                 पार्श्वभूमी बदलेल त्यावरून तुम्ही त्या शब्दाच्या किती जवळ आहात ते कळेल.
             </p>
@@ -48,7 +48,7 @@ export const InfoModal = ({isOpen, handleClose}: Props) => {
                 शब्दात 'द' आहे, आणि त्याचे रूप "दि" असे आहे, पण तो या ठिकाणी नाहीये!
             </p>
             <p className="text-sm text-gray-500">
-                (म्हणजे शब्द "दिमाख" असू शकेल, पण "कदर" किंवा दाहक नक्कीच नाही)
+                (म्हणजे शब्द "दिमाख" असू शकेल, पण "कदर" किंवा "दाहक" नक्कीच नाही)
             </p>
 
             <div className="flex justify-center mb-1 mt-4">
