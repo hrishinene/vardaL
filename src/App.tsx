@@ -1,10 +1,5 @@
-import {
-  // InformationCircleIcon,
-  ChartBarIcon,
-  SunIcon,
-  MoonIcon,
-} from '@heroicons/react/outline'
-import { useState, useEffect } from 'react'
+import { ChartBarIcon, MoonIcon, SunIcon } from '@heroicons/react/outline'
+import { useEffect, useState } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
@@ -12,19 +7,17 @@ import { AboutModal } from './components/modals/AboutModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { StatsModal } from './components/modals/StatsModal'
 import {
-  GAME_TITLE,
-  WIN_MESSAGES,
-  GAME_COPIED_MESSAGE,
-  // ABOUT_GAME_MESSAGE,
-  NOT_ENOUGH_LETTERS_MESSAGE,
-  WORD_NOT_FOUND_MESSAGE,
-  CORRECT_WORD_MESSAGE,
   BINGO_MESSAGE,
+  CORRECT_WORD_MESSAGE,
+  GAME_COPIED_MESSAGE,
+  GAME_TITLE,
+  NOT_ENOUGH_LETTERS_MESSAGE,
   SOS_MESSAGE,
-  GAME_SUBTITLE,
+  WIN_MESSAGES,
+  WORD_NOT_FOUND_MESSAGE,
 } from './constants/strings'
-import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
-import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import { MAX_CHALLENGES, MAX_WORD_LENGTH } from './constants/settings'
+import { isWinningWord, isWordInWordList, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
@@ -37,6 +30,7 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
 import { syllables } from './lib/devStrUtils'
+import { AppMenu } from './components/menu/Menu'
 
 const ALERT_TIME_MS = 3000
 
@@ -197,9 +191,10 @@ function App() {
 
   return (
     <div className="w-full absolute flex flex-col overflow-hidden h-full">
-      <div className="flex w-80 mx-auto items-center mb-5">
-        <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
-          {GAME_TITLE} <span className="text-xs">{GAME_SUBTITLE}</span>
+      <div className="flex w-80 mx-auto items-center mb-5 mt-2">
+        <AppMenu dark={isDarkMode} />
+        <h1 className="text-3xl ml-2.5 grow font-bold dark:text-white text-center">
+          {GAME_TITLE}
         </h1>
         {isDarkMode ? (
           <SunIcon
