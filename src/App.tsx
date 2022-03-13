@@ -181,6 +181,7 @@ function App() {
       <div>
         <h1 className="text-3xl font-bold text-center dark:text-white">
           {GAME_TITLE}
+          <span className="text-xs"> beta</span>
         </h1>
       </div>
       <div className="flex mx-auto items-center">
