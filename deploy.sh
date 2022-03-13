@@ -1,5 +1,6 @@
 #!/bin/sh
 
+PWD=`pwd`
 D=/tmp/deploy$$;
 echo "Temp Dir: $D"
 mkdir $D
@@ -25,4 +26,5 @@ gcloud app deploy --quiet
 echo "Deployment Done! Cleaning up!"
 cd /tmp
 rm -rf $D
+cd $PWD
 
