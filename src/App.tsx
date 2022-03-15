@@ -191,35 +191,38 @@ function App() {
 
   return (
     <div className="w-full absolute flex flex-col overflow-hidden h-full">
-      <div className="flex w-80 mx-auto items-center mb-5 mt-2">
+      <div className="flex container mt-2">
         <AppMenu dark={isDarkMode} />
-        <h1 className="text-3xl ml-2.5 grow font-bold dark:text-white text-center">
+        <h1 className="text-3xl ml-4 grow font-bold dark:text-white text-center">
           {GAME_TITLE}
         </h1>
-        {isDarkMode ? (
-          <SunIcon
+        <div className="flex justify-items-end">
+          {isDarkMode ? (
+            <SunIcon
+              className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+              onClick={() => handleDarkMode(!isDarkMode)}
+            />
+          ) : (
+            <MoonIcon
+              className="h-6 w-6 mr-2 cursor-pointer"
+              onClick={() => handleDarkMode(!isDarkMode)}
+            />
+          )}
+          <QuestionMarkCircleIcon
             className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-            onClick={() => handleDarkMode(!isDarkMode)}
+            onClick={() => setIsInfoModalOpen(true)}
           />
-        ) : (
-          <MoonIcon
-            className="h-6 w-6 mr-2 cursor-pointer"
-            onClick={() => handleDarkMode(!isDarkMode)}
+          <ChartBarIcon
+            className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+            onClick={() => setIsStatsModalOpen(true)}
           />
-        )}
-        <QuestionMarkCircleIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
-        <DotsVerticalIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsAboutModalOpen(true)}
-        />
+          <DotsVerticalIcon
+            className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+            onClick={() => setIsAboutModalOpen(true)}
+          />
+        </div>
       </div>
+      <hr className="border-solid border-t-2 border-slate-500" />
       <Grid guesses={guesses} currentGuess={currentGuess} />
       <Keyboard
         onChar={onChar}
