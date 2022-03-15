@@ -4092,4 +4092,9 @@ export const VALIDGUESSES = [
     'अंतर',
     'अंबर',
     'ऐपत',
+    // added after the fact (based on user reactions) on 15 March -- these are not there is the dictionary
+    'अंमल',
+    'अंमळ',
+    'ओरड',
+    'ओझर',
 ]
