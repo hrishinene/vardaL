@@ -13,7 +13,6 @@ git clone git@github.com:hrishinene/vardaL.git
 cd vardaL
 git fetch
 git checkout shabdak_3
-gcloud config set project shabdak_3
 
 echo "Running npm build"
 npm i

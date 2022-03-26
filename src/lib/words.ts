@@ -25,7 +25,7 @@ const generateRandomPastDate = (): number => { // thanks to https://stackoverflo
     return new Date(fromTime + Math.random() * (toTime - fromTime)).valueOf();
 }
 
-export const getWordOfDay = () => {
+export const getWordOfDay = () => { 
     // January 1, 2022 Game Epoch
     const now = Date.now()
     const msInDay = 86400000
@@ -38,8 +38,13 @@ export const getWordOfDay = () => {
         picked = today
     }
 
-    let word = WORDS[picked % WORDS.length];
-
+    // If available in url, use that word!
+    const queryParams = new URLSearchParams(window.location.search);
+    console.log("Parameter", queryParams);
+    let word = queryParams.get('w');
+    if (!word) {
+        word = WORDS[picked % WORDS.length];
+    }
     // Set the word length and attempts
     var akshare = getAkshars(word);
     setMaxWords(akshare.length);
