@@ -1,7 +1,7 @@
 import {Cell} from '../grid/Cell'
 import {BaseModal} from './BaseModal'
-import {MAX_CHALLENGES} from "../../constants/settings";
-import {MAX_WORD_LENGTH} from "../../constants/settings";
+// import {MAX_CHALLENGES} from "../../constants/settings";
+// import {MAX_WORD_LENGTH} from "../../constants/settings";
 import {ENTER_TEXT} from "../../constants/strings";
 import './ifr.css';
 

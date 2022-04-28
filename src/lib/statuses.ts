@@ -1,4 +1,4 @@
-import { solution, solutionIndex } from './words'
+import { solution } from './words'
 
 export type CharStatus = 'absent' | 'present' | 'correct' | 'unknown'
 
