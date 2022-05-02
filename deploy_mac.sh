@@ -18,7 +18,8 @@ git pull
 echo "Running npm build"
 npm i
 npm run build
-rm -rf -v !("build"|"app.yaml")
+# rm -rf -v !("build"|"app.yaml")
+rm -rf `ls |grep -v "build\|app.yaml"`
 
 echo "Deploying to Google Cloud"
 gcloud app deploy --quiet
