@@ -13,7 +13,7 @@ type Props = {
 
 export const InfoModal = ({isOpen, handleClose}: Props) => {
     return (
-        <BaseModal title="'शब्दक-२' असा खेळा" isOpen={isOpen} handleClose={handleClose}>
+        <BaseModal title="'शब्दक-३' असा खेळा" isOpen={isOpen} handleClose={handleClose}>
             <div className={`iframe-container`}>
                 <iframe src="https://www.youtube.com/embed/gqyIjbXMlDY" title="शब्दक-२ 'कसा खेळाल?"
                         frameBorder="0"
