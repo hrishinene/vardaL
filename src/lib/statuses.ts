@@ -6,8 +6,8 @@ export type CharValue =
   | '-'
   | 'अ'
   | 'आ'
+  | 'इ'
   | 'ई'
-  // | 'इ'
   | 'क'
   | 'ख'
   | 'ग'
@@ -104,7 +104,7 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
 // CharForm is nothing but CharValue and its form.
 // One character can have multiple forms too... that's addition now.
 export function getAkshars(shabda:string) : CharForm[] {
-  let AllCharValues  = ['अ', 'आ', 'ई', 'इ', 'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह', 'ळ'];
+  let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ'];
   let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
