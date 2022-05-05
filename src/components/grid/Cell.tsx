@@ -5,11 +5,12 @@ type Props = {
   value?: string
   status?: CharStatus,
   size?: string
+  onChar?: (value: string) => void
 }
 
-export const Cell = ({ value, status, size = 'small'}: Props) => {
+export const Cell = ({ value, status, size = 'small', onChar}: Props) => {
   const classes = classnames(
-    'border-solid border-2 flex items-center justify-center mx-0.5 text-4xl font-bold rounded dark:text-white',
+    'border-solid border-2 flex items-center justify-center mx-0.5 text-3xl font-bold rounded dark:text-white',
     {
       'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600':
         !status,
@@ -20,11 +21,18 @@ export const Cell = ({ value, status, size = 'small'}: Props) => {
       'shadowed bg-yellow-500 dark:bg-yellow-700 text-white border-yellow-500 dark:border-yellow-700':
         status === 'present',
       'cell-animation': !!value,
-      'w-14 h-14': size === 'big',
-      'w-10 h-10': size === 'small',
-      'w-8 h-8': size === 'micro',
+      'w-16 h-12': size === 'big',
+      'w-14 h-10': size === 'small',
+      'w-12 h-8': size === 'micro',
     }
   )
 
-  return <div className={classes}>{value}</div>
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    if (onChar && value)
+      onChar(value)
+    event.currentTarget.blur()
+  }
+  //return <div className={classes}>{value}</div>
+  // Make it a button instead of div cell - so that itls 
+  return <button className={classes} onClick={handleClick}>{value}</button>
 }

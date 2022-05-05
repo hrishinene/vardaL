@@ -214,7 +214,7 @@ function App() {
           onClick={() => setIsAboutModalOpen(true)}
         />
       </div>
-      <Grid guesses={guesses} currentGuess={currentGuess} />
+      <Grid guesses={guesses} currentGuess={currentGuess} onChar={onChar} />
       <Keyboard
         onChar={onChar}
         onDelete={onDelete}

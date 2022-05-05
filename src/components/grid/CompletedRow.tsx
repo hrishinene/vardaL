@@ -6,9 +6,10 @@ import { Cell } from './Cell'
 
 type Props = {
   guess: string
+  onChar: (value: string) => void
 }
 
-export const CompletedRow = ({ guess }: Props) => {
+export const CompletedRow = ({ guess, onChar }: Props) => {
   // const statuses = getGuessStatuses(guess);
   const charstatuses = getStatuses([guess]);
   const guessChars : CharForm[] = getAkshars(guess);
@@ -17,7 +18,7 @@ export const CompletedRow = ({ guess }: Props) => {
     <div className="flex justify-center mb-1">
       {
         guessChars.map((letter, i) => (
-        <Cell key={i} value={KeyVal(charstatuses, letter.chr).chrForm.chrForm} status={KeyVal(charstatuses, letter.chr).status} size='small' />
+        <Cell key={i} value={KeyVal(charstatuses, letter.chr).chrForm.chrForm} onChar={onChar} status={KeyVal(charstatuses, letter.chr).status} size='small' />
         )
       )
     }
