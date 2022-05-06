@@ -3,45 +3,56 @@ import { solution } from './words'
 export type CharStatus = 'absent' | 'present' | 'correct' | 'unknown'
 
 export type CharValue =
-  | '-'
-  | 'अ'
-  | 'आ'
-  | 'इ'
-  | 'ई'
-  | 'क'
-  | 'ख'
-  | 'ग'
-  | 'घ'
-  | 'च'
-  | 'छ'
-  | 'ज'
-  | 'झ'
-  | 'ट'
-  | 'ठ'
-  | 'ड'
-  | 'ढ'
-  | 'ण'
-  | 'त'
-  | 'थ'
-  | 'द'
-  | 'ध'
-  | 'न'
-  | 'प'
-  | 'फ'
-  | 'ब'
-  | 'भ'
-  | 'म'
-  | 'य'
-  | 'र'
-  | 'ल'
-  | 'व'
-  | 'श'
-  | 'स'
-  | 'ष'
-  | 'ह'
-  | 'क्ष'
-  | 'ज्ञ'
-  | 'ळ'
+| '-'
+| 'अ'
+| 'आ'
+| 'इ'
+| 'ई'
+| 'उ'
+| 'ऊ'
+| 'ए'
+| 'ऐ'
+| 'ओ'
+| 'औ'
+| 'अं'
+| 'अः'
+| 'क'
+| 'ख'
+| 'ग'
+| 'घ'
+| 'ङ'
+| 'च'
+| 'छ'
+| 'ज'
+| 'झ'
+| 'ञ'
+| 'ट'
+| 'ठ'
+| 'ड'
+| 'ढ'
+| 'ण'
+| 'त'
+| 'थ'
+| 'द'
+| 'ध'
+| 'न'
+| 'प'
+| 'फ'
+| 'ब'
+| 'भ'
+| 'म'
+| 'य'
+| 'र'
+| 'ल'
+| 'व'
+| 'श'
+| 'ष'
+| 'स'
+| 'ह'
+| 'ळ'
+| 'क्ष'
+| 'ज्ञ'
+| 'श्र'
 
   export type Swaransh =
   0x0902
@@ -65,6 +76,9 @@ export type CharValue =
   
   /** Unicode Util section - String utilities involving Unicode */
 // export type Akshar = {chr : CharValue, swaranshList:Swaransh[], chrForm:string};
+export type Akshar = {chrList: CharValue[], swaranshList: Swaransh[], chrForm:string};
+export type AksharStatus = {akshar: Akshar, status: CharStatus};
+
 export type CharForm = {chr : CharValue, chrForm:string};
 export type CharStatus2 = {chrForm : CharForm, status:CharStatus};
 
@@ -87,6 +101,14 @@ export function getShabda( akshars: CharForm[]) : string {
   return retval;
 }
 
+export function getPoornaShabda( akshars: Akshar[]) : string {
+  let retval:string = "";
+  akshars.forEach((val:Akshar) => {
+  retval = retval.concat(val.chrForm);
+  })
+  return retval;
+}
+
 export function isRepeatAkshar(shabda : CharForm[]):boolean {
     //for (var i = 0; i < shabda.length; i++) {
       //var alpha:CharForm = shabda[i];
@@ -104,7 +126,7 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
 // CharForm is nothing but CharValue and its form.
 // One character can have multiple forms too... that's addition now.
 export function getAkshars(shabda:string) : CharForm[] {
-  let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ'];
+  let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ','श्र'];
   let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
@@ -133,6 +155,52 @@ export function getAkshars(shabda:string) : CharForm[] {
     //console.log("Pushing ", ch, " form ", form);
     let chForm:CharForm = {chr : ch, chrForm : form};
     akshars.push(chForm);
+
+    return akshars;
+}
+
+export function getPoornaAkshars(shabda:string) : Akshar[] {
+  let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ','श्र'];
+  let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
+  let AksharBreak = 0x094D;
+  // console.log("Calling getAkshars");
+  // console.log("initializing AllChars");
+  let akshars:Akshar[] = [];
+  let ch:CharValue = '-'; // use constant
+  let form:string = "";
+  let swaranshs:Swaransh[] = [];
+  let chars:CharValue[] = [];
+  // let sList:Swaransh[] = [];
+  // let found:boolean = false;
+    for (var i = 0; i < shabda.length; i++) {
+      let alpha = shabda.charAt(i);
+      let firstChar = alpha.charAt(0);
+      let firstCharCode = alpha.charCodeAt(0);
+      if (AllCharValues.includes(firstChar)) {
+          if (ch !== '-') {
+            //console.log("Pushing ", ch, " form ", form);
+            let poornaAkshar:Akshar = {chrList : chars, swaranshList: swaranshs, chrForm : form};
+            akshars.push(poornaAkshar);
+            swaranshs = []; // clear
+            chars = []; // clear
+          }
+          ch = firstChar as CharValue;
+          chars.push(ch);
+          form = form.concat(firstChar);
+      } else if (AllSwaransh.includes(firstCharCode)) {
+          form = form.concat(firstChar);
+          swaranshs.push(firstCharCode as Swaransh);
+          //console.log("Char ", alpha, " form ", form);
+      } else if (firstCharCode === AksharBreak) {
+          form = form.concat(firstChar);
+          ch = '-';
+      } else {
+          console.log("<HVN>Invalid character: ", alpha);
+      }
+    }
+    //console.log("Pushing ", ch, " form ", form);
+    let lastAkshar:Akshar = {chrList : chars, swaranshList: swaranshs, chrForm : form};
+    akshars.push(lastAkshar);
 
     return akshars;
 }

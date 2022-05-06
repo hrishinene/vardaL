@@ -44,8 +44,8 @@ export const generateEmojiGrid = (guesses: string[]) => {
                             // return '🟧'
                             return '🟡';
                         default:
-                            // return '⬜'
-                            return '⚫';
+                            return '⬛';
+                            // return '⚫';
                     }
                 })
                 .join('')
