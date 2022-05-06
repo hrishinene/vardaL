@@ -125,11 +125,12 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
 // This is major - what it does is, from string creates CharForm array.
 // CharForm is nothing but CharValue and its form.
 // One character can have multiple forms too... that's addition now.
-export function getAkshars(shabda:string) : CharForm[] {
+export function getAksharsOld(shabda:string) : CharForm[] {
   let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ','श्र'];
   let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
+  console.log("Calling getAkshars OLD with: ", shabda);
   let akshars:CharForm[] = [];
   let ch:CharValue = '-'; // use constant
   let form:string = "";
@@ -156,8 +157,24 @@ export function getAkshars(shabda:string) : CharForm[] {
     let chForm:CharForm = {chr : ch, chrForm : form};
     akshars.push(chForm);
 
+    console.log("getAksharsOld returning: ", akshars);
     return akshars;
 }
+
+export function getAkshars(shabda:string) : CharForm[] {
+  console.log("Calling getAkshars New with: ", shabda);
+  let akshars:Akshar[] = getPoornaAkshars(shabda);
+  let charForms:CharForm[] = [];
+
+    for (var i = 0; i < akshars.length; i++) {
+      let akshar:Akshar = akshars[i];
+      charForms.push({chr : akshar.chrList[0], chrForm : akshar.chrForm});
+    }
+
+  console.log("getAksharsNew returning: ", charForms);
+  return charForms;
+
+} 
 
 export function getPoornaAkshars(shabda:string) : Akshar[] {
   let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ','श्र'];
@@ -178,11 +195,12 @@ export function getPoornaAkshars(shabda:string) : Akshar[] {
       let firstCharCode = alpha.charCodeAt(0);
       if (AllCharValues.includes(firstChar)) {
           if (ch !== '-') {
-            //console.log("Pushing ", ch, " form ", form);
+            console.log("Pushing ", ch, " form ", form);
             let poornaAkshar:Akshar = {chrList : chars, swaranshList: swaranshs, chrForm : form};
             akshars.push(poornaAkshar);
             swaranshs = []; // clear
             chars = []; // clear
+            form = ""; // clear
           }
           ch = firstChar as CharValue;
           chars.push(ch);
@@ -256,87 +274,8 @@ export const KeyVal = (statusMap : {[key: string]: CharStatus2 }, txt:string) : 
 
     return {chrForm:{chr : txt as CharValue, chrForm : txt}, status : 'unknown' };
 }
+
 /** Unicode section over */
-
-// export const getStatuses_1 = (
-//   guesses: string[]
-// ): { [key: string]: CharStatus } => {
-//   const charObj: { [key: string]: CharStatus } = {}
-
-//   guesses.forEach((word) => {
-//     //console.log("Guess: ", word, "Akshare: " + JSON.stringify(getAkshars(word)));
-//     word.split('').forEach((letter, i) => {
-//     //console.log("Solution: ", solution, "Akshare: " + JSON.stringify(getAkshars(solution)));
-//       if (!solution.includes(letter)) {
-//         // make status absent
-//         return (charObj[letter] ='absent');
-//       }
-
-//       if (letter === solution[i]) {
-//         //make status correct
-//         return (charObj[letter] = 'correct')
-//       }
-
-//       if (charObj[letter] !== 'correct') {
-//         //make status present
-//         return (charObj[letter] = 'present')
-//       }
-//     })
-//   })
-
-//   return charObj
-// }
-
-
-
-// export const getGuessStatuses_1 = (guess: string): CharStatus[] => {
-//   const splitSolution = solution.split('')
-//   const splitGuess = guess.split('')
-
-//   const solutionCharsTaken = splitSolution.map((_) => false)
-
-//   const statuses: CharStatus[] = Array.from(Array(guess.length))
-
-//     // console.log("<HVN>splitSolution = ", splitSolution);
-//     // console.log("<HVN>splitGuess = ", splitGuess);
-//   // handle all correct cases first
-//   splitGuess.forEach((letter, i) => {
-//     // console.log("<HVN>splitGuess.forEach letter = ", letter, " index = " + i);
-//     if (letter === splitSolution[i]) {
-//       statuses[i] = 'correct'
-//       solutionCharsTaken[i] = true
-//       return
-//     }
-//   })
-
-//   splitGuess.forEach((letter, i) => {
-//     if (statuses[i]) return
-
-//     if (!splitSolution.includes(letter)) {
-//       // handles the absent case
-//       statuses[i] = 'absent'
-//       return
-//     }
-
-//     // now we are left with "present"s
-//     const indexOfPresentChar = splitSolution.findIndex(
-//       (x, index) => x === letter && !solutionCharsTaken[index]
-//     )
-
-//     if (indexOfPresentChar > -1) {
-//       statuses[i] = 'present'
-//       solutionCharsTaken[indexOfPresentChar] = true
-//       return
-//     } else {
-//       statuses[i] = 'absent'
-//       return
-//     }
-//   })
-
-//     // console.log("<HVN>statuses = ", statuses);
-//   return statuses
-// }
-
 /**
  * HVN code to convert to forms
  * @param guesses 
