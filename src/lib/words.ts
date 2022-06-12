@@ -5,7 +5,8 @@ import {getAkshars, unicodeMatch,isRepeatAkshar} from "./statuses";
 
 // <HVN> Shabdak2 - suspend valid guess
 export const isWordInWordList = (word: string) => {
-    return  (false === isRepeatAkshar(getAkshars(word)))
+    return true; // allow any word for now
+    // return  (false === isRepeatAkshar(getAkshars(word)))
     // return (
         // WORDS.includes(word.toLowerCase()) ||
         // VALIDGUESSES.includes(word.toLowerCase())
