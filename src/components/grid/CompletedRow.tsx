@@ -1,4 +1,4 @@
-import { CharForm, getStatuses } from '../../lib/statuses'
+import { CharForm, getStatuses, getAksharAndKeyStatuses, GuessKeyMap, AksharStatus } from '../../lib/statuses'
 import { getAkshars } from '../../lib/statuses'
 // import { getGuessStatuses } from '../../lib/statuses'
 import { KeyVal } from '../../lib/statuses'
@@ -11,14 +11,16 @@ type Props = {
 
 export const CompletedRow = ({ guess, onChar }: Props) => {
   // const statuses = getGuessStatuses(guess);
-  const charstatuses = getStatuses([guess]);
-  const guessChars : CharForm[] = getAkshars(guess);
+  const guessAndKeyStatuses:GuessKeyMap = getAksharAndKeyStatuses([guess]);
+  console.log(guessAndKeyStatuses); 
+  // const charstatuses = getStatuses([guess]);
+  // const guessChars : CharForm[] = getAkshars(guess);
 
   return (
     <div className="flex justify-center mb-1">
       {
-        guessChars.map((letter, i) => (
-        <Cell key={i} value={KeyVal(charstatuses, letter.chr).chrForm.chrForm} onChar={onChar} status={KeyVal(charstatuses, letter.chr).status} size='small' />
+        guessAndKeyStatuses.guessMap[guess].map((letter:AksharStatus, i) => (
+        <Cell key={i} value={letter.akshar.chrForm} onChar={onChar} status={letter.status} size='small' />
         )
       )
     }

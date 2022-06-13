@@ -1,5 +1,5 @@
 import {KeyValue} from '../../lib/keyboard'
-import {getStatuses, CharStatus2, KeyVal} from '../../lib/statuses'
+import {CharStatus2, KeyVal, KeyVal2, CharForm, getStatuses, getAksharAndKeyStatuses, GuessKeyMap, AksharStatus } from '../../lib/statuses'
 import {Key} from './Key'
 import {useEffect} from 'react'
 import {ENTER_TEXT, DELETE_TEXT} from '../../constants/strings'
@@ -11,7 +11,8 @@ type Props = {
     guesses: string[]
 }
 export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
-    const charStatuses:{ [key: string]: CharStatus2 }  = getStatuses(guesses)
+    const guessAndKeyStatuses: GuessKeyMap = getAksharAndKeyStatuses(guesses);
+    // const charStatuses:{ [key: string]: CharStatus2 }  = getStatuses(guesses)
 
     // console.log("<HVN>charStatuses = ", JSON.stringify(charStatuses));
 
@@ -48,81 +49,81 @@ export const Keyboard = ({onChar, onDelete, onEnter, guesses}: Props) => {
 //<div className="max-w-[550px] m-auto w-full flex-auto overflow-auto mt-2">
 <div>
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "अ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'अ').status}/>
-<Key value={KeyVal(charStatuses, "आ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'आ').status}/>
-<Key value={KeyVal(charStatuses, "इ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'इ').status}/>
-<Key value={KeyVal(charStatuses, "ई").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ई').status}/>
-<Key value={KeyVal(charStatuses, "उ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'उ').status}/>
-<Key value={KeyVal(charStatuses, "ऊ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ऊ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "अ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'अ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "आ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'आ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "इ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'इ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ई").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ई').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "उ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'उ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ऊ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ऊ').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "ए").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ए').status}/>
-<Key value={KeyVal(charStatuses, "ऐ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ऐ').status}/>
-<Key value={KeyVal(charStatuses, "ओ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ओ').status}/>
-<Key value={KeyVal(charStatuses, "औ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'औ').status}/>
-<Key value={KeyVal(charStatuses, "अं").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'अं').status}/>
-<Key value={KeyVal(charStatuses, "अः").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'अः').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ए").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ए').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ऐ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ऐ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ओ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ओ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "औ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'औ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "अं").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'अं').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "अः").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'अः').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
 <Key value="ENTER" onClick={onClick}> {ENTER_TEXT} </Key>
-<Key value={KeyVal(charStatuses, "क").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'क').status}/>
-<Key value={KeyVal(charStatuses, "ख").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ख').status}/>
-<Key value={KeyVal(charStatuses, "ग").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ग').status}/>
-<Key value={KeyVal(charStatuses, "घ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'घ').status}/>
-<Key value={KeyVal(charStatuses, "ङ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ङ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "क").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'क').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ख").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ख').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ग").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ग').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "घ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'घ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ङ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ङ').status}/>
 <Key value="DELETE" onClick={onClick}> {DELETE_TEXT} </Key>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "च").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'च').status}/>
-<Key value={KeyVal(charStatuses, "छ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'छ').status}/>
-<Key value={KeyVal(charStatuses, "ज").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ज').status}/>
-<Key value={KeyVal(charStatuses, "झ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'झ').status}/>
-<Key value={KeyVal(charStatuses, "ञ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ञ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "च").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'च').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "छ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'छ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ज").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ज').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "झ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'झ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ञ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ञ').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "ट").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ट').status}/>
-<Key value={KeyVal(charStatuses, "ठ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ठ').status}/>
-<Key value={KeyVal(charStatuses, "ड").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ड').status}/>
-<Key value={KeyVal(charStatuses, "ढ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ढ').status}/>
-<Key value={KeyVal(charStatuses, "ण").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ण').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ट").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ट').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ठ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ठ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ड").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ड').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ढ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ढ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ण").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ण').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "त").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'त').status}/>
-<Key value={KeyVal(charStatuses, "थ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'थ').status}/>
-<Key value={KeyVal(charStatuses, "द").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'द').status}/>
-<Key value={KeyVal(charStatuses, "ध").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ध').status}/>
-<Key value={KeyVal(charStatuses, "न").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'न').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "त").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'त').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "थ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'थ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "द").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'द').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ध").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ध').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "न").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'न').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "प").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'प').status}/>
-<Key value={KeyVal(charStatuses, "फ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'फ').status}/>
-<Key value={KeyVal(charStatuses, "ब").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ब').status}/>
-<Key value={KeyVal(charStatuses, "भ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'भ').status}/>
-<Key value={KeyVal(charStatuses, "म").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'म').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "प").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'प').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "फ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'फ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ब").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ब').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "भ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'भ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "म").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'म').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "य").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'य').status}/>
-<Key value={KeyVal(charStatuses, "र").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'र').status}/>
-<Key value={KeyVal(charStatuses, "ल").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ल').status}/>
-<Key value={KeyVal(charStatuses, "व").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'व').status}/>
-<Key value={KeyVal(charStatuses, "श").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'श').status}/>
-<Key value={KeyVal(charStatuses, "ष").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ष').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "य").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'य').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "र").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'र').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ल").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ल').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "व").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'व').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "श").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'श').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ष").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ष').status}/>
 </div>
 
 <div className="flex justify-center mb-1">
-<Key value={KeyVal(charStatuses, "स").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'स').status}/>
-<Key value={KeyVal(charStatuses, "ह").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ह').status}/>
-<Key value={KeyVal(charStatuses, "ळ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ळ').status}/>
-<Key value={KeyVal(charStatuses, "क्ष").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'क्ष').status}/>
-<Key value={KeyVal(charStatuses, "ज्ञ").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'ज्ञ').status}/>
-<Key value={KeyVal(charStatuses, "श्र").chrForm.chr} onClick={onClick} status={KeyVal(charStatuses, 'श्र').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "स").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'स').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ह").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ह').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ळ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ळ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "क्ष").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'क्ष').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "ज्ञ").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'ज्ञ').status}/>
+<Key value={KeyVal2(guessAndKeyStatuses.keyMap, "श्र").akshar.chrForm} onClick={onClick} status={KeyVal2(guessAndKeyStatuses.keyMap, 'श्र').status}/>
 </div>
 
 </div>
