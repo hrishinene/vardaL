@@ -19,7 +19,7 @@ export const CompletedRow = ({ guess, onChar }: Props) => {
   return (
     <div className="flex justify-center mb-1">
       {
-        guessAndKeyStatuses.guessMap[guess].map((letter:AksharStatus, i) => (
+        guessAndKeyStatuses.guessMap[guess].aksharStatuses.map((letter:AksharStatus, i) => (
         <Cell key={i} value={letter.akshar.chrForm} onChar={onChar} status={letter.status} size='small' />
         )
       )

@@ -81,7 +81,7 @@ export type CharValue =
 
 
 const AllCharValues = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष', 'ज्ञ', 'श्र'];
-const AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
+const AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
 const Jod = 0x094d; // Check actually and confirm in wiki or java
 const JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
   
@@ -89,18 +89,23 @@ const JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki 
 // export type Akshar = {chr : CharValue, swaranshList:Swaransh[], chrForm:string};
 export type Akshar = {chrList: CharValue[], swaranshList: Swaransh[], chrForm:string};
 export type AksharStatus = {akshar: Akshar, status: CharStatus};
-export type GuessKeyMap = {solution:Akshar[], guessMap:{[guess:string] : AksharStatus[]}, keyMap:{[key:string]:CharStatus}}
+export type GuessKeyMap = { 
+  solution: Akshar[], 
+  guessMap: { [guess: string]: {aksharStatuses: AksharStatus[], resolvedIndices:number[] }}, 
+  keyMap: { [key: string]: CharStatus },
+}
 
 export type CharForm = {chr : CharValue, chrForm:string};
 export type CharStatus2 = {chrForm : CharForm, status:CharStatus};
 
 export function unicodeMatch(src:string, tgt:string) : boolean {
-  var srcAkshare:CharForm[] = getAkshars(src);
-  var tgtAkshare:CharForm[] = getAkshars(tgt);
+  var srcAkshare:Akshar[] = getPoornaAkshars(src);
+  var tgtAkshare:Akshar[] = getPoornaAkshars(tgt);
   if (srcAkshare.length !== tgtAkshare.length) return false;
 
   for (var i =0; i < srcAkshare.length; i++ ) {
-    if (srcAkshare[i].chr !== tgtAkshare[i].chr) return false;    
+    console.log("unicodeMatch", srcAkshare[i].chrForm, tgtAkshare[i].chrForm);
+    if (!hasOverlappingMoolakshar(srcAkshare[i], tgtAkshare[i])) return false;
   }
   return true;
 }
@@ -140,7 +145,7 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
 // <HVN-TODO> Swaransh
 export function getAksharsOld(shabda:string) : CharForm[] {
   // let AllCharValues  = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','अं','अः','क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह','ळ','क्ष','ज्ञ','श्र'];
-  // let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
+  // let AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
   console.log("Calling getAkshars OLD with: ", shabda);
@@ -198,7 +203,7 @@ export function getAkshars(shabda:string) : CharForm[] {
  */
 export function getPoornaAkshars(shabda:string) : Akshar[] {
   let AllCharValues = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष', 'ज्ञ', 'श्र'];
-  let AllSwaransh = [0x0902, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
+  let AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   let Jod = 0x094d; // Check actually and confirm in wiki or java
   let JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
   // let AksharBreak = 0x094d;
@@ -530,7 +535,7 @@ function prepareGuessKeyMap(guesses:string[], map:GuessKeyMap) : GuessKeyMap {
       aksharStatuses[index] = { akshar: a, status: "absent" };
       updateKeyMap(map, a, "absent" );
     });
-    map.guessMap[guess] = aksharStatuses;
+    map.guessMap[guess] = {aksharStatuses:aksharStatuses, resolvedIndices: []};
   });
 
   return map;
@@ -552,25 +557,40 @@ function prepareKeyStatuses(guess:string, map:GuessKeyMap) : GuessKeyMap {
 } 
 
 function matchPerfectFormPerfectPosition(guess:string, map:GuessKeyMap) : GuessKeyMap {
-  let guessAksharStatuses = map.guessMap[guess];
+  let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
+  let resolvedIndices = map.guessMap[guess].resolvedIndices;
   map.solution.forEach((solAkshar:Akshar, index) => {
     let guessAksharStatus:AksharStatus = guessAksharStatuses[index];
     if (solAkshar.chrForm === guessAksharStatus.akshar.chrForm) {
       guessAksharStatus.status = "correct"; // if by reference, this is all that is needed
+      resolvedIndices.push(index);
       updateKeyMap(map, solAkshar, "correct");
+      return;
     }
   });
   return map;
 } 
 
 function matchPerfectFormImperfectPosition(guess:string, map:GuessKeyMap) : GuessKeyMap {
-  let guessAksharStatuses = map.guessMap[guess];
+  let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
+  let resolvedIndices = map.guessMap[guess].resolvedIndices;
   map.solution.forEach((solAkshar: Akshar, solutionIndx) => {
+      if (resolvedIndices.includes(solutionIndx)) {
+        return;
+      }
+
+    let found:boolean = false;
     guessAksharStatuses.forEach((guessAksharStatus: AksharStatus, guessIndex) => {
+      if (found) return;
+
       if (solutionIndx !== guessIndex) {
         if (solAkshar.chrForm === guessAksharStatus.akshar.chrForm) {
-          if (guessAksharStatus.status === "absent") guessAksharStatus.status = "present";
+          if (guessAksharStatus.status === "absent") {
+            guessAksharStatus.status = "present";
+            resolvedIndices.push(solutionIndx);
+          }
           updateKeyMap(map, guessAksharStatus.akshar, "present");
+          found = true;
         }
       }
     });
@@ -580,13 +600,21 @@ function matchPerfectFormImperfectPosition(guess:string, map:GuessKeyMap) : Gues
 } 
 
 function matchImPerfectFormPerfectPosition(guess:string, map:GuessKeyMap) : GuessKeyMap {
-  let guessAksharStatuses = map.guessMap[guess];
-  map.solution.forEach((solAkshar:Akshar, index) => {
-    let guessAksharStatus:AksharStatus = guessAksharStatuses[index];
-    if (hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) && guessAksharStatus.status === "absent") {
+  let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
+  let resolvedIndices = map.guessMap[guess].resolvedIndices;
+  map.solution.forEach((solAkshar: Akshar, solutionIndx) => {
+    if (resolvedIndices.includes(solutionIndx))
+      return;
+
+    let found:boolean = false;
+
+    let guessAksharStatus: AksharStatus = guessAksharStatuses[solutionIndx];
+    if (!found && hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) && guessAksharStatus.status === "absent") {
       guessAksharStatus.akshar = solAkshar; // if by reference, this is all that is needed
       guessAksharStatus.status = "correct"; // if by reference, this is all that is needed
+      resolvedIndices.push(solutionIndx);
       updateKeyMap(map, guessAksharStatus.akshar, "correct");
+      found = true;
     }
   });
 
@@ -594,14 +622,22 @@ function matchImPerfectFormPerfectPosition(guess:string, map:GuessKeyMap) : Gues
 } 
 
 function matchImPerfectFormImperfectPosition(guess:string, map:GuessKeyMap) : GuessKeyMap {
-  let guessAksharStatuses = map.guessMap[guess];
+  let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
+  let resolvedIndices = map.guessMap[guess].resolvedIndices;
   map.solution.forEach((solAkshar: Akshar, solutionIndx) => {
+    if (resolvedIndices.includes(solutionIndx)) {
+      return;
+    }
+
+    let found:boolean = false;
     guessAksharStatuses.forEach((guessAksharStatus: AksharStatus, guessIndex) => {
       if (solutionIndx !== guessIndex) {
-        if (hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) && guessAksharStatus.status === "absent") {
+        if (!found && hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) && guessAksharStatus.status === "absent") {
           guessAksharStatus.akshar = solAkshar; // if by reference, this is all that is needed
           guessAksharStatus.status = "present";
           updateKeyMap(map, guessAksharStatus.akshar, "present");
+          resolvedIndices.push(solutionIndx);
+          found = true;
         }
       }
     });
@@ -612,7 +648,7 @@ function matchImPerfectFormImperfectPosition(guess:string, map:GuessKeyMap) : Gu
 
 // Functions for rendering Guess and Keyboard
 export function getGuessForm(guess:string, map:GuessKeyMap):AksharStatus[] {
-  return map.guessMap[guess];
+  return map.guessMap[guess].aksharStatuses;
 }
 
 export function getKeyForm(key:string, map:GuessKeyMap):CharStatus {
