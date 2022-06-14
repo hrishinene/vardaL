@@ -1,8 +1,9 @@
 import {MAX_WORD_LENGTH} from "./settings";
 
 export const GAME_TITLE = 'शब्दक-३';
-export const GAME_URL = 'shabdak3.shabdak.com'
 // export const GAME_URL = 'localhost:3000';
+// export const GAME_URL = 'shabdak3.shabdak.com' // to be uncommented later
+export const GAME_URL = 'shabdak3.el.r.appspot.com';
 export const WIN_MESSAGES = ['महान!', 'उत्तम!', 'भले शाब्बास!']
 export const GAME_COPIED_MESSAGE = 'आता व्हॉट्सॅप् वर पेस्ट करा'
 export const ABOUT_GAME_MESSAGE = `'${GAME_TITLE}' विषयी थोडेसे...`
