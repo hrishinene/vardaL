@@ -1,7 +1,7 @@
 import {WORDS} from '../constants/wordlist'
 // import {VALIDGUESSES} from '../constants/validGuesses'
 import {setMaxWords, RANDOM_DATE} from "../constants/settings";
-import {getAkshars, unicodeMatch,isRepeatAkshar} from "./statuses";
+import {getAkshars, unicodeMatch,isRepeatAkshar, encodeShabda, decodeShabda} from "./statuses";
 
 // <HVN> Shabdak2 - suspend valid guess
 export const isWordInWordList = (word: string) => {
@@ -26,6 +26,7 @@ const generateRandomPastDate = (): number => { // thanks to https://stackoverflo
     return new Date(fromTime + Math.random() * (toTime - fromTime)).valueOf();
 }
 
+const PASSWORD ="j0y0fc0d1ng";
 export const getWordOfDay = () => { 
     // January 1, 2022 Game Epoch
     const now = Date.now()
@@ -41,11 +42,27 @@ export const getWordOfDay = () => {
 
     // If available in url, use that word!
     const queryParams = new URLSearchParams(window.location.search);
-    console.log("Parameter", queryParams);
-    let word = queryParams.get('w');
+    // console.log("Parameter", queryParams);
+    let word = queryParams.get('encoded');
+    let password = queryParams.get('pass');
+
+    // console.log("Word", word);
+    // console.log("Password", password);
+    // Three modes - No Word, Encoded Word, Plain word
     if (!word) {
         word = WORDS[picked % WORDS.length];
+    } else if (!password || password !== PASSWORD) {// check password 
+        word = decodeShabda(word);
     }
+
+    // console.log("FinalWord", word);
+
+    let encoded:string = encodeShabda(word);
+    // console.log("Encoded =" , encoded);
+
+    word = decodeShabda(encoded);
+    // console.log("Decoded =" , word);
+
     // Set the word length and attempts
     var akshare = getAkshars(word);
     setMaxWords(akshare.length);

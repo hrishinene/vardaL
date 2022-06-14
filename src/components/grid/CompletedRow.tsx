@@ -12,7 +12,7 @@ type Props = {
 export const CompletedRow = ({ guess, onChar }: Props) => {
   // const statuses = getGuessStatuses(guess);
   const guessAndKeyStatuses:GuessKeyMap = getAksharAndKeyStatuses([guess]);
-  console.log(guessAndKeyStatuses); 
+  // console.log(guessAndKeyStatuses); 
   // const charstatuses = getStatuses([guess]);
   // const guessChars : CharForm[] = getAkshars(guess);
 

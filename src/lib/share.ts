@@ -1,4 +1,4 @@
-import {CharStatus2, getAkshars, getGuessStatuses} from './statuses'
+import {CharStatus2, getAkshars, getGuessStatuses, getEncodedUrl} from './statuses'
 import {solutionIndex} from './words'
 import {GAME_TITLE, GAME_URL} from '../constants/strings'
 import {MAX_CHALLENGES} from '../constants/settings'
@@ -11,9 +11,10 @@ import {MAX_CHALLENGES} from '../constants/settings'
 // }
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
+    let encodedUrl = getEncodedUrl(GAME_URL);
     let text = `${GAME_TITLE} (${solutionIndex}) ${lost ? 'X' : guesses.length}/${MAX_CHALLENGES}\n\n` +
-        generateEmojiGrid(guesses) +
-        `\n\n${GAME_URL} `;
+        generateEmojiGrid(guesses) + `\n\n` + "माझे शब्दक:" + `\n` + encodedUrl + ' (beta)';
+
     navigator.clipboard.writeText(text).then(r => {
         // ignore for now
     })

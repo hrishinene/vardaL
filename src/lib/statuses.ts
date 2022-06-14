@@ -104,7 +104,7 @@ export function unicodeMatch(src:string, tgt:string) : boolean {
   if (srcAkshare.length !== tgtAkshare.length) return false;
 
   for (var i =0; i < srcAkshare.length; i++ ) {
-    console.log("unicodeMatch", srcAkshare[i].chrForm, tgtAkshare[i].chrForm);
+    // console.log("unicodeMatch", srcAkshare[i].chrForm, tgtAkshare[i].chrForm);
     if (!hasOverlappingMoolakshar(srcAkshare[i], tgtAkshare[i])) return false;
   }
   return true;
@@ -135,7 +135,7 @@ export function isRepeatAkshar(shabda : CharForm[]):boolean {
         if (alpha.chr === beta.chr) return true;
       }
     }
-    console.log("Akshar not repeat: ", JSON.stringify(shabda) );
+    // console.log("Akshar not repeat: ", JSON.stringify(shabda) );
     return false;
 }
 
@@ -148,7 +148,7 @@ export function getAksharsOld(shabda:string) : CharForm[] {
   // let AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
-  console.log("Calling getAkshars OLD with: ", shabda);
+  // console.log("Calling getAkshars OLD with: ", shabda);
   let akshars:CharForm[] = [];
   let ch:CharValue = '-'; // use constant
   let form:string = "";
@@ -175,7 +175,7 @@ export function getAksharsOld(shabda:string) : CharForm[] {
     let chForm:CharForm = {chr : ch, chrForm : form};
     akshars.push(chForm);
 
-    console.log("getAksharsOld returning: ", akshars);
+    // console.log("getAksharsOld returning: ", akshars);
     return akshars;
 }
 
@@ -666,7 +666,7 @@ function hasOverlappingMoolakshar(solAkshar: Akshar, guessAkshar: Akshar) : bool
 function updateKeyMap(map: GuessKeyMap, akshar: Akshar, status: CharStatus) {
   getMoolakshars(akshar).forEach((moolakshar:CharValue) => {
     let existingStatus:CharStatus = map.keyMap[moolakshar];
-    console.log("UpdateKeyMap", moolakshar, existingStatus, "=>", status);
+    // console.log("UpdateKeyMap", moolakshar, existingStatus, "=>", status);
     if (existingStatus === undefined || existingStatus === "absent") {
       map.keyMap[moolakshar] = status;
       return;
@@ -679,5 +679,33 @@ function updateKeyMap(map: GuessKeyMap, akshar: Akshar, status: CharStatus) {
       return;
     }
   });
+}
+
+export function encodeShabda(shabda:string) : string {
+    let encoded:string = "";
+    for (var i = 0; i < shabda.length; i++) {
+      let charCode = shabda.charCodeAt(i);
+      // console.log("Encoding Original", String.fromCharCode(charCode), "New => ", String.fromCharCode((charCode + i + 3)));
+      encoded = encoded.concat(String.fromCharCode(charCode + i + 3));
+    }
+  return encoded;
+}
+
+export function decodeShabda(shabda:string) : string {
+    let decoded:string = "";
+    for (var i = 0; i < shabda.length; i++) {
+      let charCode = shabda.charCodeAt(i);
+      // console.log("Decoding Original", String.fromCharCode(charCode), "New => ", String.fromCharCode((charCode - i - 3)));
+      decoded = decoded.concat(String.fromCharCode(charCode - i - 3));
+    }
+
+
+  return decoded;
+}
+
+export function getEncodedUrl(baseUrl:string) {
+  let encoded = baseUrl +"?encoded=" + encodeShabda(solution);
+  // console.log("Url =", encoded);
+  return encoded;
 }
 

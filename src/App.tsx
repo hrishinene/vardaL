@@ -33,7 +33,7 @@ import {
   DotsVerticalIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
-import { getAkshars, getShabda } from './lib/statuses'
+import { getAkshars, getShabda, unicodeMatch } from './lib/statuses'
 
 const ALERT_TIME_MS = 2500
 
@@ -63,7 +63,11 @@ function App() {
     if (loaded?.solution !== solution) {
       return []
     }
-    const gameWasWon = loaded.guesses.includes(solution)
+
+    const gameWasWon = unicodeMatch(
+      loaded.guesses[loaded.guesses.length - 1],
+      solution
+    )
     if (gameWasWon) {
       setIsGameWon(true)
     }
