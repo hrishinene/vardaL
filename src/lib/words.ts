@@ -57,15 +57,15 @@ export const getWordOfDay = () => {
 
     // console.log("FinalWord", word);
 
-    let encoded:string = encodeShabda(word);
+    // let encoded:string = encodeShabda(word);
     // console.log("Encoded =" , encoded);
 
-    word = decodeShabda(encoded);
-    // console.log("Decoded =" , word);
-
+    // word = decodeShabda(encoded);
     // Set the word length and attempts
     var akshare = getAkshars(word);
+    console.log("Number of letters =" , akshare.length);
     setMaxWords(akshare.length);
+
 
     return {
         solution: word,

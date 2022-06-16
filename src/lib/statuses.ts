@@ -326,6 +326,18 @@ export const getStatuses = (
   return charObj;
 }
 
+export const getGuessStatuses2 = (guess: string): CharStatus[] => {
+  const statuses: CharStatus[]  = [];
+  const guessAndKeyStatuses:GuessKeyMap = getAksharAndKeyStatuses([guess]);
+  guessAndKeyStatuses.guessMap[guess].aksharStatuses.forEach((aksharStatus:AksharStatus, index) => {
+    statuses[index] = aksharStatus.status;
+
+  });
+
+    // console.log("<HVN>statuses = ", statuses);
+  return statuses
+}
+
 export const getGuessStatuses = (guess: string): CharStatus2[] => {
   const splitSolution:CharForm[] = getAkshars(solution);
   const splitGuess:CharForm[] = getAkshars(guess);

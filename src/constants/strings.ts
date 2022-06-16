@@ -2,9 +2,9 @@ import {MAX_WORD_LENGTH} from "./settings";
 
 export const GAME_TITLE = 'शब्दक-३';
 // export const GAME_URL = 'localhost:3000';
-export const GAME_URL = 'shabdak3.shabdak.com' // to be uncommented later
+export const GAME_URL = 'shabdak3.shabdak.com (beta)' 
 export const GAME_ENCODE_URL = 'shabdak3.el.r.appspot.com';
-export const WIN_MESSAGES = ['महान!', 'उत्तम!', 'भले शाब्बास!']
+export const WIN_MESSAGES = ['महान!', 'उत्तम!', 'भले शाब्बास!', 'वा वा !', 'मानलं तुम्हाला!', 'कमाल!', 'फार छान!', 'अगदी बरोब्बर!']
 export const GAME_COPIED_MESSAGE = 'आता व्हॉट्सॅप् वर पेस्ट करा'
 export const ABOUT_GAME_MESSAGE = `'${GAME_TITLE}' विषयी थोडेसे...`
 export const NOT_ENOUGH_LETTERS_MESSAGE = `निदान ${MAX_WORD_LENGTH} तरी अक्षरं हवीत!`
