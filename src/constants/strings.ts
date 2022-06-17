@@ -23,3 +23,5 @@ export const TOTAL_TRIES_TEXT = 'तुमचे अंदाज'
 export const SUCCESS_RATE_TEXT = 'यशाची सरासरी'
 export const CURRENT_STREAK_TEXT = 'अखंडित यशोमाला'
 export const BEST_STREAK_TEXT = 'सर्वोत्तम यशोमाला'
+export const BRUHADKOSH_REF =(solution : string) => 'हा शब्द <b>बृहद्कोशाच्या</b> सौजन्याने आपल्यापर्यंत आणण्यात येत आहे. एकाच वेळी अनेक कोशांत या शब्दाचा अर्थ पाहण्यासाठी <a href=https://bruhadkosh.org/words?shodh=विराजमान>इथे क्लिक करा</a>'
+export const BRUHAD =  (solution: string) => `हा शब्द <b>बृहद्कोशाच्या</b> सौजन्याने आपल्यापर्यंत आणण्यात येत आहे. एकाच वेळी अनेक कोशांत या शब्दाचा अर्थ पाहण्यासाठी <b><u><a href = "https://bruhadkosh.org/words?shodh= +${solution}"> इथे क्लिक करा</a></u></b>`

@@ -3,7 +3,7 @@ import { StatBar } from '../stats/StatBar'
 import { Histogram } from '../stats/Histogram'
 import { GameStats } from '../../lib/localStorage'
 import { shareStatus } from '../../lib/share'
-import { tomorrow } from '../../lib/words'
+import { solution, tomorrow } from '../../lib/words'
 import { BaseModal } from './BaseModal'
 import {
   STATISTICS_TITLE,
@@ -84,6 +84,13 @@ export const StatsModal = ({
           >
             <a href={FORM_LINK} rel="noopener noreferrer"> तुमची प्रतिक्रिया? </a>
           </button>
+        </div>
+      )}
+      {(isGameLost || isGameWon) && (
+        <div className="mt-5 sm:mt-6 dark:text-white">
+        <h5 className="text-sm leading-6 font-tiny text-gray-700 dark:text-gray-100">
+        हा शब्द <b><u><a href="https://bruhadkosh.org"> बृहद्कोशाच्या</a></u></b> सौजन्याने आपल्यापर्यंत आणण्यात येत आहे. एकाच वेळी अनेक कोशांत या शब्दाचा अर्थ पाहण्यासाठी इथे क्लिक करा: <b><u><a href={'https://bruhadkosh.org/words?shodh=' + solution}>{solution}</a></u></b>
+        </h5>
         </div>
       )}
     </BaseModal>
