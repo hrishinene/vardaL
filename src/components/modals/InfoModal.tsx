@@ -22,34 +22,34 @@ export const InfoModal = ({isOpen, handleClose}: Props) => {
             </div>
 
             <p className="text-sm text-gray-500 dark:text-gray-300">
-            <h2> काही उदाहरणे </h2>
+            <h2><b> काही उदाहरणे </b></h2>
                 एक लपलेला शब्द ओळखा! प्रत्येक प्रयात्नानंतर '{ENTER_TEXT}' कळ दाबली की घरांची
                 पार्श्वभूमी बदलेल त्यावरून तुम्ही त्या शब्दाच्या किती जवळ आहात ते कळेल.
             </p>
 
             <div className="flex justify-center mb-1 mt-4">
-                <Cell value="सु" status="correct"/>
+                <Cell value="स्वा" status="correct"/>
                 <Cell value="व" status="absent"/>
                 <Cell value="ड" status="absent"/>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-300">
-                शब्दात 'स' आहे आणि तो याच ठिकाणी आहे, आणि त्याचे रूप "सु" असे आहे 
+                शब्दात 'स' आहे आणि तो याच ठिकाणी आहे, आणि त्याचे रूप "स्वा" असे आहे 
 
             </p>
             <p className="text-sm text-gray-500">
-                (म्हणजे शब्द "सुबक" किंवा "सुरेल" असू शकेल, पण "संवाद" नक्कीच नाही.)
+                (म्हणजे शब्द "स्वागत" किंवा "स्वातंत्र्य" असू शकेल, पण "संवाद" नक्कीच नाही.)
             </p>
 
             <div className="flex justify-center mb-1 mt-4">
-                <Cell value="व" status="absent"/>
-                <Cell value="दि" status="present"/>
-                <Cell value="न" status="absent"/>
+                <Cell value="स" status="absent"/>
+                <Cell value="द" status="absent"/>
+                <Cell value="न्व" status="present"/>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-300">
-                शब्दात 'द' आहे, आणि त्याचे रूप "दि" असे आहे, पण तो या ठिकाणी नाहीये!
+                शब्दात 'न' आहे, आणि त्याचे रूप "न्व" असे आहे, पण तो या ठिकाणी नाहीये!
             </p>
             <p className="text-sm text-gray-500">
-                (म्हणजे शब्द "दिमाख" असू शकेल, पण "कदर" किंवा "दाहक" नक्कीच नाही)
+                (म्हणजे शब्द "अन्वय" असू शकेल, पण "कदर" किंवा "दाहक" नक्कीच नाही)
             </p>
 
             <div className="flex justify-center mb-1 mt-4">

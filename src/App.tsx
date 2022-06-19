@@ -193,6 +193,11 @@ function App() {
           <a href="http://www.shabdak.com" className="underline font-bold">
             शब्दक-१{' '}
           </a>{' '}
+          |{' '}
+          <a href="http://shabdak2.shabdak.com" className="underline font-bold">
+            शब्दक-२{' '}
+          </a>
+          {'    '}
         </h1>
         {isDarkMode ? (
           <SunIcon
@@ -218,6 +223,8 @@ function App() {
           onClick={() => setIsAboutModalOpen(true)}
         />
       </div>
+      <hr />
+      <div />
       <Grid guesses={guesses} currentGuess={currentGuess} onChar={onChar} />
       <Keyboard
         onChar={onChar}
