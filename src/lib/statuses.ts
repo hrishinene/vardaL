@@ -478,6 +478,7 @@ export const getAksharAndKeyStatuses = (
   guesses.forEach((word) => {
     // map = prepareKeyStatuses(word, map);
     map = matchPerfectFormPerfectPosition(word, map);
+    map = matchImPerfectFormPerfectPositionForPlainAkshar(word, map);
     map = matchPerfectFormImperfectPosition(word, map);
     map = matchImPerfectFormPerfectPosition(word, map);
     map = matchImPerfectFormImperfectPosition(word, map);
@@ -574,6 +575,29 @@ function matchPerfectFormPerfectPosition(guess:string, map:GuessKeyMap) : GuessK
   map.solution.forEach((solAkshar:Akshar, index) => {
     let guessAksharStatus:AksharStatus = guessAksharStatuses[index];
     if (solAkshar.chrForm === guessAksharStatus.akshar.chrForm) {
+      guessAksharStatus.status = "correct"; // if by reference, this is all that is needed
+      resolvedIndices.push(index);
+      updateKeyMap(map, solAkshar, "correct");
+      return;
+    }
+  });
+  return map;
+} 
+
+function matchImPerfectFormPerfectPositionForPlainAkshar(guess:string, map:GuessKeyMap) : GuessKeyMap {
+  let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
+  let resolvedIndices = map.guessMap[guess].resolvedIndices;
+
+  map.solution.forEach((solAkshar:Akshar, index) => {
+    if (resolvedIndices.includes(index)) // don't process
+      return;
+
+    let guessAksharStatus:AksharStatus = guessAksharStatuses[index];
+    if (guessAksharStatus.akshar.chrList.length == 1 // plain letter
+      && guessAksharStatus.akshar.swaranshList.length == 0 
+      && hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) 
+      && guessAksharStatus.status === "absent") {
+      guessAksharStatus.akshar = solAkshar; // if by reference, this is all that is needed
       guessAksharStatus.status = "correct"; // if by reference, this is all that is needed
       resolvedIndices.push(index);
       updateKeyMap(map, solAkshar, "correct");
