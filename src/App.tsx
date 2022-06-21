@@ -193,11 +193,6 @@ function App() {
           <a href="http://www.shabdak.com" className="underline font-bold">
             शब्दक-१{' '}
           </a>{' '}
-          |{' '}
-          <a href="http://shabdak2.shabdak.com" className="underline font-bold">
-            शब्दक-२{' '}
-          </a>
-          {'    '}
         </h1>
         {isDarkMode ? (
           <SunIcon
