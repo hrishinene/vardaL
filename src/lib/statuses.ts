@@ -83,7 +83,7 @@ export type CharValue =
 
 const AllCharValues = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'ऱ', 'क्ष', 'ज्ञ', 'श्र'];
 const AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
-const Jod = 0x094d; // Check actually and confirm in wiki or java
+// const Jod = 0x094d; // Check actually and confirm in wiki or java
 // const JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
   
   /** Unicode Util section - String utilities involving Unicode */
