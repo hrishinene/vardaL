@@ -1,4 +1,4 @@
-import { PresentationChartBarIcon } from '@heroicons/react/outline';
+//import { PresentationChartBarIcon } from '@heroicons/react/outline';
 import { solution } from './words'
 
 export type CharStatus = 'absent' | 'present' | 'correct' | 'unknown'
@@ -84,7 +84,7 @@ export type CharValue =
 const AllCharValues = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'ऱ', 'क्ष', 'ज्ञ', 'श्र'];
 const AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
 const Jod = 0x094d; // Check actually and confirm in wiki or java
-const JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
+// const JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
   
   /** Unicode Util section - String utilities involving Unicode */
 // export type Akshar = {chr : CharValue, swaranshList:Swaransh[], chrForm:string};
@@ -207,7 +207,7 @@ export function getPoornaAkshars(shabda:string) : Akshar[] {
   let AllCharValues = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'ऱ', 'क्ष', 'ज्ञ', 'श्र'];
   let AllSwaransh = [0x0902, 0x903, 0x093e, 0x093f, 0x0940, 0x0941, 0x0942, 0x0943, 0x0945, 0x0946, 0x0947, 0x0948, 0x0949, 0x094a, 0x094b, 0x094c, 0x094f, 0x0971];
   let Jod = 0x094d; // Check actually and confirm in wiki or java
-  let JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
+  // let JodChar = String.fromCharCode(Jod); // Check actually and confirm in wiki or java
   // let AksharBreak = 0x094d;
   // console.log("Calling getAkshars");
   // console.log("initializing AllChars");
@@ -562,14 +562,14 @@ function prepareGuessKeyMap(guesses:string[], map:GuessKeyMap) : GuessKeyMap {
  * @param map 
  * @returns 
  */
-function prepareKeyStatuses(guess:string, map:GuessKeyMap) : GuessKeyMap {
-  let akshars:Akshar[] = getPoornaAkshars(guess);
+// function prepareKeyStatuses(guess:string, map:GuessKeyMap) : GuessKeyMap {
+  // let akshars:Akshar[] = getPoornaAkshars(guess);
   // Convert all keys to absent if they are unknown
-  akshars.forEach((akshar:Akshar) => {
-    updateKeyMap(map, akshar, "absent");
-  });
-  return map;
-} 
+  // akshars.forEach((akshar:Akshar) => {
+    // updateKeyMap(map, akshar, "absent");
+  // });
+  // return map;
+// } 
 
 function matchPerfectFormPerfectPosition(guess:string, map:GuessKeyMap) : GuessKeyMap {
   let guessAksharStatuses = map.guessMap[guess].aksharStatuses;
@@ -595,8 +595,8 @@ function matchImPerfectFormPerfectPositionForPlainAkshar(guess:string, map:Guess
       return;
 
     let guessAksharStatus:AksharStatus = guessAksharStatuses[index];
-    if (guessAksharStatus.akshar.chrList.length == 1 // plain letter
-      && guessAksharStatus.akshar.swaranshList.length == 0 
+    if (guessAksharStatus.akshar.chrList.length === 1 // plain letter
+      && guessAksharStatus.akshar.swaranshList.length === 0 
       && hasOverlappingMoolakshar(solAkshar, guessAksharStatus.akshar) 
       && guessAksharStatus.status === "absent") {
       guessAksharStatus.akshar = solAkshar; // if by reference, this is all that is needed

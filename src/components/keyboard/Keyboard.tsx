@@ -1,5 +1,5 @@
 import {KeyValue} from '../../lib/keyboard'
-import {CharStatus2, KeyVal, KeyVal2, CharForm, getStatuses, getAksharAndKeyStatuses, GuessKeyMap, AksharStatus } from '../../lib/statuses'
+import {KeyVal2, getAksharAndKeyStatuses, GuessKeyMap } from '../../lib/statuses'
 import {Key} from './Key'
 import {useEffect} from 'react'
 import {ENTER_TEXT, DELETE_TEXT} from '../../constants/strings'

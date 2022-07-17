@@ -1,7 +1,7 @@
-import { CharForm, getStatuses, getAksharAndKeyStatuses, GuessKeyMap, AksharStatus } from '../../lib/statuses'
-import { getAkshars } from '../../lib/statuses'
+import { getAksharAndKeyStatuses, GuessKeyMap, AksharStatus } from '../../lib/statuses'
+// import { getAkshars } from '../../lib/statuses'
 // import { getGuessStatuses } from '../../lib/statuses'
-import { KeyVal } from '../../lib/statuses'
+// import { KeyVal } from '../../lib/statuses'
 import { Cell } from './Cell'
 
 type Props = {
