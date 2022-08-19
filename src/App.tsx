@@ -42,6 +42,7 @@ function App() {
     '(prefers-color-scheme: dark)'
   ).matches
 
+  // initialize
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
@@ -64,10 +65,11 @@ function App() {
       return []
     }
 
-    const gameWasWon = unicodeMatch(
-      loaded.guesses[loaded.guesses.length - 1],
-      solution
-    )
+    const gameWasWon =
+      loaded.guesses.length > 0
+        ? unicodeMatch(loaded.guesses[loaded.guesses.length - 1], solution)
+        : false
+
     if (gameWasWon) {
       setIsGameWon(true)
     }
