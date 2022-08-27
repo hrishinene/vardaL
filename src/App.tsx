@@ -177,96 +177,63 @@ function App() {
   }
 
   return (
-    <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div className="py-8 mx-auto sm:px-6 lg:px-8">
       <div>
         <h1 className="text-3xl font-bold text-center dark:text-white">
-          {GAME_TITLE}
-          <span className="text-xs italic"> (unlimited play mode)</span>
+          या पृष्ठावरून आपल्याला &quot;शब्दककोडे&quot; च्या पृष्ठाकडे
+          पुनर्निर्देशित (redirect) केले जात आहे...&nbsp;
+          <br />
+          <span className="text-xl italic">
+            {' '}
+            <p>
+              पृष्ठ न उघडल्यास कृपया{' '}
+              <u>
+                <a href="http://shabdakkode.shabdak.com">यावर टिचकी मारा</a>
+              </u>
+              &nbsp;
+            </p>
+          </span>
         </h1>
+        -{' '}
       </div>
-      <div className="flex mx-auto items-center">
-        <h1 className="text-xl grow font-bold dark:text-white ml-3">
-          <a href="http://www.shabdak.com" className="underline font-bold">
-            शब्दक-१{' '}
-          </a>{' '}
-          |{' '}
-          <a href="http://shabdak3.shabdak.com" className="underline font-bold">
-            शब्दक-३{' '}
-          </a>
-          {'    '}
-        </h1>
-        {isDarkMode ? (
-          <SunIcon
-            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-            onClick={() => handleDarkMode(!isDarkMode)}
-          />
-        ) : (
-          <MoonIcon
-            className="h-6 w-6 mr-2 cursor-pointer"
-            onClick={() => handleDarkMode(!isDarkMode)}
-          />
-        )}
-        <QuestionMarkCircleIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
-        <DotsVerticalIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsAboutModalOpen(true)}
-        />
+      <div className="text-xl text-left dark:text-white">
+        <p>
+          तुम्हाला "शब्दक" आणि "शब्दक-२" आवडत असतील, तर "शब्दककोडे" नक्की आवडेल
+          याची आम्हाला खात्री आहे!
+        </p>
+        <p>शब्दककोड्यामधे आहेत:</p>
       </div>
-      <hr />
-      <Grid guesses={guesses} currentGuess={currentGuess} />
-      <Keyboard
-        onChar={onChar}
-        onDelete={onDelete}
-        onEnter={onEnter}
-        guesses={guesses}
-      />
-      <InfoModal
-        isOpen={isInfoModalOpen}
-        handleClose={() => setIsInfoModalOpen(false)}
-      />
-      <StatsModal
-        isOpen={isStatsModalOpen}
-        handleClose={() => setIsStatsModalOpen(false)}
-        guesses={guesses}
-        gameStats={stats}
-        isGameLost={isGameLost}
-        isGameWon={isGameWon}
-        handleShare={() => {
-          setSuccessAlert(GAME_COPIED_MESSAGE)
-          return setTimeout(() => setSuccessAlert(''), ALERT_TIME_MS)
-        }}
-      />
-      <AboutModal
-        isOpen={isAboutModalOpen}
-        handleClose={() => setIsAboutModalOpen(false)}
-      />
+      <div className="text-l text-left dark:text-white">
+        <ul>
+          <li>- बरीच जोडाक्षरं,</li>
+          <li>- थोडे अवघड शब्द</li>
+          <li>- बरेच मोठे शब्द&nbsp;</li>
+          <li>
+            -{' '}
+            <u>
+              <a href="https://bruhadkosh.org">&quot;बृहदकोशाच्या&quot;</a>
+            </u>{' '}
+            सौजन्यानी खूप खूप जास्त शब्द.&nbsp;
+          </li>
+          <li>
+            - तसेच तुम्ही सोडवलेला शब्द सांकेतिक भाषेत शेअर करून मित्रमंडळींना
+            सोडवण्यास देण्याची सुविधा... &nbsp;
+          </li>
+        </ul>
+      </div>
+      -
+      <div>
+        <p>अजूनही काही गमतीजमती जाणून घेण्यासाठी जरूर पहा:&nbsp;</p>
+        <br />
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/jU-BLLsCosA"
+          title="YouTube video player"
+        ></iframe>
 
-      {/*<button*/}
-      {/*  type="button"*/}
-      {/*  className="mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"*/}
-      {/*  onClick={() => setIsAboutModalOpen(true)}*/}
-      {/*>*/}
-      {/*  {ABOUT_GAME_MESSAGE}*/}
-      {/*</button>*/}
-
-      <Alert message={NOT_ENOUGH_LETTERS_MESSAGE} isOpen={isNotEnoughLetters} />
-      <Alert
-        message={WORD_NOT_FOUND_MESSAGE}
-        isOpen={isWordNotFoundAlertOpen}
-      />
-      <Alert message={CORRECT_WORD_MESSAGE(solution)} isOpen={isGameLost} />
-      <Alert
-        message={successAlert}
-        isOpen={successAlert !== ''}
-        variant="success"
-      />
+        <hr />
+      </div>
     </div>
   )
 }
