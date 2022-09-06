@@ -19,9 +19,17 @@ import {
   NOT_ENOUGH_LETTERS_MESSAGE,
   WORD_NOT_FOUND_MESSAGE,
   CORRECT_WORD_MESSAGE,
+  GAME_URL,
+  GAME_ENCODE_URL,
+  GAME_ENCODE_URL_RANDOM,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
-import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import {
+  isWordInWordList,
+  isWinningWord,
+  solution,
+  wordSource,
+} from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
@@ -190,11 +198,34 @@ function App() {
         </h1>
       </div>
       <div className="flex mx-auto items-center">
-        <h1 className="text-xl grow font-bold dark:text-white ml-3">
-          <a href="http://www.shabdak.com" className="underline font-bold">
-            शब्दक-१{' '}
-          </a>{' '}
-        </h1>
+        {wordSource === 'Daily' ? (
+          <h1 className="text-xl grow font-bold dark:text-white ml-3 bg-green-100 border-green-600 border-b p-4 m-4 rounded">
+            <a href={GAME_ENCODE_URL} className="underline font-bold">
+              आजचे दैनिक कोडेे{' '}
+            </a>{' '}
+          </h1>
+        ) : (
+          <h1 className="text-xl grow font-bold dark:text-white ml-3">
+            <a href={GAME_ENCODE_URL} className="underline font-bold">
+              आजचे दैनिक कोडेे{' '}
+            </a>{' '}
+          </h1>
+        )}
+
+        {wordSource === 'Random' ? (
+          <h1 className="text-xl grow font-bold dark:text-white ml-3 bg-green-100 border-green-600 border-b p-4 m-4 rounded">
+            <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
+              नवीन कोडे (अमर्याद){' '}
+            </a>{' '}
+          </h1>
+        ) : (
+          <h1 className="text-xl grow font-bold dark:text-white ml-3">
+            <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
+              नवीन कोडे (अमर्याद){' '}
+            </a>{' '}
+          </h1>
+        )}
+
         {isDarkMode ? (
           <SunIcon
             className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"

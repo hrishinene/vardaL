@@ -33,18 +33,24 @@ export const getWordOfDay = () => {
     const msInDay = 86400000
     const today = Math.floor((now - epochMs) / msInDay)
     const nextday = (today + 1) * msInDay + epochMs
-    let picked: number
-    if (RANDOM_DATE) {
-        picked = generateRandomPastDate()
-    } else {
-        picked = today
-    }
+
+    let wrdSrc = "Unknown";
 
     // If available in url, use that word!
     const queryParams = new URLSearchParams(window.location.search);
     // console.log("Parameter", queryParams);
     let word = queryParams.get('encoded');
     let password = queryParams.get('pass');
+    let randomWord = queryParams.get('random');
+
+    let picked: number
+    if (randomWord) {
+        picked = generateRandomPastDate()
+        wrdSrc = "Random"
+    } else {
+        picked = today
+        wrdSrc = "Daily"
+    }
 
     // console.log("Word", word);
     // console.log("Password", password);
@@ -53,6 +59,7 @@ export const getWordOfDay = () => {
         word = WORDS[picked % WORDS.length];
     } else if (!password || password !== PASSWORD) {// check password 
         word = decodeShabda(word);
+        wrdSrc = "Encoded"
     }
 
     // console.log("FinalWord", word);
@@ -71,7 +78,8 @@ export const getWordOfDay = () => {
         solution: word,
         solutionIndex: today,
         tomorrow: nextday,
+        wordSource: wrdSrc
     }
 }
 
-export const {solution, solutionIndex, tomorrow} = getWordOfDay()
+export const {solution, solutionIndex, tomorrow, wordSource} = getWordOfDay()
