@@ -215,13 +215,13 @@ function App() {
         {wordSource === 'Random' ? (
           <h1 className="text-xl grow font-bold dark:text-white ml-3 bg-green-100 border-green-600 border-b p-4 m-4 rounded">
             <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
-              नवीन कोडे (अमर्याद){' '}
+              नवीन सराव कोडे (अमर्याद){' '}
             </a>{' '}
           </h1>
         ) : (
           <h1 className="text-xl grow font-bold dark:text-white ml-3">
             <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
-              नवीन कोडे (अमर्याद){' '}
+              नवीन सराव कोडे (अमर्याद){' '}
             </a>{' '}
           </h1>
         )}
