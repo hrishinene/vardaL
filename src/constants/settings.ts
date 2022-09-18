@@ -9,14 +9,14 @@ export function setMaxWords(len:number) {
     MAX_CHALLENGES = 6;
     switch (len) {
         case 3:
-           MAX_CHALLENGES = 8; 
+           MAX_CHALLENGES = 7; 
             break;
         case 4:
-           MAX_CHALLENGES = 7; 
+           MAX_CHALLENGES = 6; 
             break;
     
         default:
-            MAX_CHALLENGES = 6;
+            MAX_CHALLENGES = 5;
             break;
     }
 }
