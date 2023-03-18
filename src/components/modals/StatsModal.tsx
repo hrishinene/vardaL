@@ -1,15 +1,13 @@
-import Countdown from 'react-countdown'
 import { StatBar } from '../stats/StatBar'
 import { Histogram } from '../stats/Histogram'
 import { GameStats } from '../../lib/localStorage'
 import { shareStatus } from '../../lib/share'
-import { solution, tomorrow } from '../../lib/words'
+import { solution } from '../../lib/words'
 import { BaseModal } from './BaseModal'
 import {
   STATISTICS_TITLE,
   GUESS_DISTRIBUTION_TEXT,
   GUESS_DISTRIBUTION_SUBTEXT,
-  NEW_WORD_TEXT,
   SHARE_TEXT,
   GAME_ENCODE_URL_RANDOM,
 } from '../../constants/strings'
@@ -62,11 +60,16 @@ export const StatsModal = ({
       {(isGameLost || isGameWon) && (
         <div className="mt-5 sm:mt-6 columns-2 dark:text-white">
           <div>
-          <button
+            <button
             type="button"
-            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-8 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-            <a href={GAME_ENCODE_URL_RANDOM} rel="noopener noreferrer">खेळत रहा</a>
-          </button>
+            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-8 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            onClick={(e) => {
+            e.preventDefault();
+            window.location.href=GAME_ENCODE_URL_RANDOM;
+            }}
+            >
+            खेळत रहा
+            </button>
           </div>
           <button
             type="button"
