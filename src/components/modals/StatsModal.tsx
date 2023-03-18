@@ -11,6 +11,7 @@ import {
   GUESS_DISTRIBUTION_SUBTEXT,
   NEW_WORD_TEXT,
   SHARE_TEXT,
+  GAME_ENCODE_URL_RANDOM,
 } from '../../constants/strings'
 
 import {FORM_LINK} from "../../constants/settings";
@@ -61,12 +62,11 @@ export const StatsModal = ({
       {(isGameLost || isGameWon) && (
         <div className="mt-5 sm:mt-6 columns-2 dark:text-white">
           <div>
-            <h5>{NEW_WORD_TEXT}</h5>
-            <Countdown
-              className="text-lg font-medium text-gray-900 dark:text-gray-100"
-              date={tomorrow}
-              daysInHours={true}
-            />
+          <button
+            type="button"
+            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-8 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+            <a href={GAME_ENCODE_URL_RANDOM} rel="noopener noreferrer">खेळत रहा</a>
+          </button>
           </div>
           <button
             type="button"
