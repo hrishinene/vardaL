@@ -199,29 +199,29 @@ function App() {
       </div>
       <div className="flex mx-auto items-center">
         {wordSource === 'Daily' ? (
-          <h1 className="text-xl grow font-bold dark:text-white ml-3 bg-green-100 border-green-600 border-b p-4 m-4 rounded">
+          <h1 className="text-2xl grow font-bold dark:text-white ml-3 bg-green-300 dark:bg-green-900 border-green-600 border-b p-4 m-4 rounded">
             <a href={GAME_ENCODE_URL} className="underline font-bold">
-              आजचे दैनिक कोडेे{' '}
+              आजचे शब्दक{' '}
             </a>{' '}
           </h1>
         ) : (
           <h1 className="text-xl grow font-bold dark:text-white ml-3">
-            <a href={GAME_ENCODE_URL} className="underline font-bold">
-              आजचे दैनिक कोडेे{' '}
+            <a href={GAME_ENCODE_URL} className="font-bold">
+              आजचे शब्दक{' '}
             </a>{' '}
           </h1>
         )}
 
         {wordSource === 'Random' ? (
-          <h1 className="text-xl grow font-bold dark:text-white ml-3 bg-green-100 border-green-600 border-b p-4 m-4 rounded">
+          <h1 className="text-2xl grow font-bold dark:text-white ml-3 bg-green-300 dark:bg-green-900 border-green-600 border-b p-4 m-4 rounded">
             <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
-              नवीन सराव कोडे (अमर्याद){' '}
+              सराव शब्दक{' '}
             </a>{' '}
           </h1>
         ) : (
           <h1 className="text-xl grow font-bold dark:text-white ml-3">
-            <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
-              नवीन सराव कोडे (अमर्याद){' '}
+            <a href={GAME_ENCODE_URL_RANDOM} className="font-bold">
+              सराव शब्दक{' '}
             </a>{' '}
           </h1>
         )}
