@@ -22,6 +22,7 @@ import {
   // GAME_URL,
   GAME_ENCODE_URL,
   GAME_ENCODE_URL_RANDOM,
+  GAME_SHABDAK_1_URL,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
 import {
@@ -195,6 +196,13 @@ function App() {
       <div>
         <h1 className="text-3xl font-bold text-center dark:text-white">
           {GAME_TITLE}
+        </h1>
+      </div>
+      <div>
+        <h1 className="text-xl font-bold text-right dark:text-white">
+          <a href={GAME_SHABDAK_1_URL} className="underline font-bold">
+            सदाबहार शब्दक-१{' '}
+          </a>{' '}
         </h1>
       </div>
       <div className="flex mx-auto items-center">
