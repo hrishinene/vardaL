@@ -20,7 +20,7 @@ export const AppMenu = ({dark}: Props) => {
                 </MenuButton>}
                 theming={dark ? "dark" : undefined}
             >
-                <MenuItem href="http://shabdak2.shabdak.com" className="text-xl underline decoration-indigo-500 decoration-2">शब्दक-२</MenuItem>
+                <MenuItem href="http://www.shabdak.com" className="text-xl underline decoration-indigo-500 decoration-2">नवे शब्दक</MenuItem>
                 <MenuItem href="http://hindi.shabdak.com" className="text-xl underline decoration-indigo-500 decoration-2">शब्दक - हिन्दी</MenuItem>
                 <MenuItem href="https://shabdak.github.io"
                           rel="noopener noreferrer"
