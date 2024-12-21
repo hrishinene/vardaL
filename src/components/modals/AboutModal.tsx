@@ -13,18 +13,20 @@ export const AboutModal = ({isOpen, handleClose}: Props) => {
     return (
         <BaseModal title={ABOUT_GAME_MESSAGE} isOpen={isOpen} handleClose={handleClose}>
             <p className="text-gray-800 dark:text-gray-400 text-left justify-items-start">
-                गेल्या महिन्याभरात सुमारे १६ लाख वेळा 'शब्दक' खेळला गेला आहे! तुमच्या प्रेमाने आम्ही भारावून गेलो आहोत! लोभ आहेच, तो वाढावा!
+                गेल्या सुमारे ३ वर्षात शब्दक कित्येक लक्ष वेळा खेळले गेले! तुमच्या प्रेमाने आम्ही भारावून गेलो आहोत! लोभ आहेच, तो वाढावा! 
                 काही उल्लेखनीय गोष्टी:
             </p>
-            <ul className="list-disc text-left list-inside text-gray-800 dark:text-gray-400 justify-items-start">
+            <ul className="list-disc text-left list-inside text-gray-800 dark:text-gray-400 justify-items-start mb-2">
                 <li> सोपे नियम शिका आणि एक नेहमीचा {MARATHI_NAMES[MAX_WORD_LENGTH]}-अक्षरी शब्द {MARATHI_NAMES[MAX_CHALLENGES]} प्रयत्नांत ओळखा!</li>
                 <li> आता तुम्हाला एका दिवशी (फक्त) एक शब्दक-१ खेळता येईल आणि मित्र-मैत्रिणींशी निखळ स्पर्धा करता येईल! </li>
-                <li> शब्दक तुम्हाला आवडला तर <a href="http://www.shabdak.com" className="decoration-indigo-500 decoration-2 underline"> नवे शब्दक </a>
+                <li> शब्दक तुम्हाला आवडले तर <a href="http://www.shabdak.com" className="decoration-indigo-500 decoration-2 underline font-extrabold"> लोकप्रिय जोडाक्षरी शब्दक </a>
                     आणखी आवडेल. <a className="decoration-indigo-500 underline underline-offset-1" href="http://www.shabdak.com">पहा तर खेळून</a>!</li>
+                <li> आणि नुकतेच आलेले <a href="http://shabdabandha.shabdak.com" className="decoration-indigo-500 decoration-2 underline font-extrabold"> मनोरंजक बहुरंगी शब्दबंध </a>
+                    नक्की खेळून बघा!</li>
                 <li> तुमच्या <a href={FORM_LINK} rel="noopener noreferrer" className="decoration-indigo-500 decoration-2 underline"> प्रतिक्रिया </a>कळवत रहा!
                 </li>
             </ul>
-            <p className="text-xs text-gray-500 dark:text-gray-300 text-left">
+            <p className="text-s text-gray-500 dark:text-gray-300 text-left">
                 <a href="https://github.com/kedarmhaswade/vardaL" className="underline font-bold">'शब्दक-१'</a>
                 : "Wordle" वर आधारित एक शब्दखेळ. मराठीत तो आपल्यापर्यंत आणला आहे, केदार म्हसवडे, हृषिकेश नेने, निरंजन पेडणेकर,
                 राहुल केळकर, प्रशांत पेंडसे यांनी.
