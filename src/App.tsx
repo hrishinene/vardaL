@@ -23,6 +23,7 @@ import {
   GAME_ENCODE_URL,
   GAME_ENCODE_URL_RANDOM,
   GAME_SHABDAK_1_URL,
+  GAME_URL,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
 import {
@@ -43,6 +44,7 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
 import { getAkshars, getShabda, unicodeMatch } from './lib/statuses'
+import DropdownComponent from './components/DropDownComponent'
 
 const ALERT_TIME_MS = 2500
 
@@ -89,6 +91,17 @@ function App() {
   })
 
   const [stats, setStats] = useState(() => loadStats())
+  const [gameDate, setGameDate] = useState<Date>(() => {
+    // Check if the date is in the future
+    const url = new URL(window.location.href)
+    var todayDate = new Date()
+    var todayParam = url.searchParams.get('today')
+    if (todayParam) todayDate = new Date(todayParam + 'T00:00:00')
+
+    // console.log("todayDate: " + todayDate)
+
+    return todayDate
+  })
 
   useEffect(() => {
     if (isDarkMode) {
@@ -193,17 +206,56 @@ function App() {
 
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div>
-        <h1 className="text-3xl font-bold text-center dark:text-white">
-          {GAME_TITLE}
-        </h1>
-      </div>
-      <div>
-        <h1 className="text-xl font-bold text-right dark:text-white">
-          <a href={GAME_SHABDAK_1_URL} className="underline font-bold">
-            सदाबहार शब्दक-१{' '}
-          </a>{' '}
-        </h1>
+      {/* <Timer /> Add the Timer component here */}
+
+      <div className="flex container mt-2 items-center">
+        {/* left-aligned div */}
+        <div className="flex-1 text-left">
+          <DropdownComponent />
+        </div>
+
+        {/* center-aligned div */}
+        <div className="flex-1 flex-col justify-center items-center pb-4 text-center">
+          <h1 className="text-5xl font-bold dark:text-white text-center">
+            <a href={GAME_URL} rel="noopener noreferrer">
+              {GAME_TITLE}
+            </a>
+          </h1>
+          <div>
+            <span className="mt-2 text-2xl text-black dark:text-white">
+              {gameDate.toLocaleDateString('mr-IN', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+          </div>
+        </div>
+        <div className="flex-1 flex justify-end items-center space-x-2 text-left">
+          {isDarkMode ? (
+            <SunIcon
+              className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+              onClick={() => handleDarkMode(!isDarkMode)}
+            />
+          ) : (
+            <MoonIcon
+              className="h-6 w-6 mr-2 cursor-pointer"
+              onClick={() => handleDarkMode(!isDarkMode)}
+            />
+          )}
+          <QuestionMarkCircleIcon
+            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+            onClick={() => setIsInfoModalOpen(true)}
+          />
+          <ChartBarIcon
+            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
+            onClick={() => setIsStatsModalOpen(true)}
+          />
+          <DotsVerticalIcon
+            className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
+            onClick={() => setIsAboutModalOpen(true)}
+          />
+        </div>
       </div>
       <div className="flex mx-auto items-center">
         {wordSource === 'Daily' ? (
@@ -233,30 +285,6 @@ function App() {
             </a>{' '}
           </h1>
         )}
-
-        {isDarkMode ? (
-          <SunIcon
-            className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-            onClick={() => handleDarkMode(!isDarkMode)}
-          />
-        ) : (
-          <MoonIcon
-            className="h-6 w-6 mr-2 cursor-pointer"
-            onClick={() => handleDarkMode(!isDarkMode)}
-          />
-        )}
-        <QuestionMarkCircleIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
-        <DotsVerticalIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsAboutModalOpen(true)}
-        />
       </div>
       <hr />
       <div />

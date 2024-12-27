@@ -40,6 +40,14 @@ export const StatsModal = ({
         handleClose={handleClose}
       >
         <StatBar gameStats={gameStats} />
+        <hr className="border-solid border-t-2 border-slate-500 mb-2" />
+        <p className="text-gray-800 dark:text-gray-400 text-center justify-items-center font-bold">
+          हे खेळही नक्की खेळून पहा:
+        </p>
+        <ul className="list-none">
+          <li><a href="http://shabdak1.shabdak.com" className="text-l underline decoration-indigo-500 dark:text-gray-300 decoration-2">सदाबहार त्रयक्षरी शब्दक-१</a></li>
+          <li><a href="http://shabdabandha.shabdak.com" className="text-l underline decoration-indigo-500 dark:text-gray-300 decoration-2">मनोरंजक बहुरंगी शब्दबंध</a></li>
+        </ul>
       </BaseModal>
     )
   }
@@ -96,6 +104,14 @@ export const StatsModal = ({
         </h5>
         </div>
       )}
+      <hr className="border-solid border-t-2 border-slate-500 mb-2" />
+      <p className="text-gray-800 dark:text-gray-400 text-center justify-items-center font-bold">
+        हे खेळही नक्की खेळून पहा:
+      </p>
+      <ul className="list-none">
+        <li><a href="http://shabdak1.shabdak.com" className="text-l underline decoration-indigo-500 dark:text-gray-300 decoration-2">सदाबहार त्रयक्षरी शब्दक-१</a></li>
+        <li><a href="http://shabdabandha.shabdak.com" className="text-l underline decoration-indigo-500 dark:text-gray-300 decoration-2">मनोरंजक बहुरंगी शब्दबंध</a></li>
+      </ul>
     </BaseModal>
   )
 }
