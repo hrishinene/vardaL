@@ -10,7 +10,7 @@ type Props = {
 
 export const Cell = ({ value, status, size = 'small', onChar}: Props) => {
   const classes = classnames(
-    'border-solid border-2 flex items-center justify-center mx-0.5 text-3xl font-bold rounded dark:text-white',
+    'w-14 h-14 border-solid border-2 flex items-center justify-center mx-0.5 font-bold rounded dark:text-white',
     {
       'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600':
         !status,
@@ -20,10 +20,10 @@ export const Cell = ({ value, status, size = 'small', onChar}: Props) => {
       'shadowed bg-lime-500 text-white border-lime-500': status === 'correct',
       'shadowed bg-yellow-500 dark:bg-yellow-700 text-white border-yellow-500 dark:border-yellow-700':
         status === 'present',
-      'cell-animation': !!value,
-      'w-16 h-12': size === 'big',
-      'w-14 h-10': size === 'small',
-      'w-12 h-8': size === 'micro',
+      'cell-animation': !!value, 
+      'w-16 h-12 text-3xl': size === 'big',
+      'w-13 h-9 text-2xl': size === 'small',
+      'w-12 h-7': size === 'micro',
     }
   )
 

@@ -14,15 +14,16 @@ type Props = {
 export const Key = ({
   children,
   status,
-  width = 50,
+  width = 40,
   value,
   onClick,
 }: Props) => {
   const classes = classnames(
-    'flex items-center justify-center rounded mx-0.5 text-3xl font-bold cursor-pointer select-none dark:text-white',
+    'flex items-center justify-center rounded mx-0.5 font-bold cursor-pointer text-2xl select-none dark:text-white',
     {
-      'bg-slate-200 dark:bg-slate-600 hover:bg-slate-300 active:bg-slate-400': status === 'unknown',
-      'bg-slate-600 dark:bg-slate-400 text-white': status === 'absent',
+      'bg-slate-200 dark:bg-slate-600 hover:bg-slate-300 active:bg-slate-400':
+        !status,
+      'bg-slate-400 dark:bg-slate-800 text-white': status === 'absent',
       'bg-lime-500 hover:bg-lime-600 active:bg-lime-700 text-white':
         status === 'correct',
       'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 dark:bg-yellow-700 text-white':
@@ -37,7 +38,7 @@ export const Key = ({
 
   return (
     <button
-      style={{ width: `${width}px`, height: '50px' }}
+      style={{ width: `${width}px`, height: '35px' }}
       className={classes}
       onClick={handleClick}
     >

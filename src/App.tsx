@@ -45,6 +45,8 @@ import {
 } from '@heroicons/react/solid'
 import { getAkshars, getShabda, unicodeMatch } from './lib/statuses'
 import DropdownComponent from './components/DropDownComponent'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const ALERT_TIME_MS = 2500
 
@@ -91,6 +93,9 @@ function App() {
   })
 
   const [stats, setStats] = useState(() => loadStats())
+
+  // Game Date begin
+  // Manage Date and Archive
   const [gameDate, setGameDate] = useState<Date>(() => {
     // Check if the date is in the future
     const url = new URL(window.location.href)
@@ -102,6 +107,39 @@ function App() {
 
     return todayDate
   })
+
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    return gameDate
+  })
+
+  const localFormatDate = (date: Date): string => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  const getDateUrl = (baseUrl: string, date: Date): string => {
+    let encoded = baseUrl + '?today=' + localFormatDate(date)
+    return encoded
+  }
+
+  const handleDateChange = (
+    date: Date | null,
+    event?: React.SyntheticEvent
+  ) => {
+    // console.log(date)
+    if (date) {
+      setSelectedDate(date)
+    }
+  }
+
+  const navigationLink = () => {
+    // console.log("navigate to archive game dated: " + selectedDate)
+    return getDateUrl(GAME_ENCODE_URL, selectedDate)
+  }
+
+  // --- Game Date over ---
 
   useEffect(() => {
     if (isDarkMode) {
@@ -259,7 +297,7 @@ function App() {
       </div>
       <div className="flex mx-auto items-center">
         {wordSource === 'Daily' ? (
-          <h1 className="text-2xl grow font-bold dark:text-white ml-3 bg-green-300 dark:bg-green-900 border-green-600 border-b p-4 m-4 rounded">
+          <h1 className="text-xl grow font-bold dark:text-white bg-green-300 dark:bg-green-900 border-green-600 p-2 rounded">
             <a href={GAME_ENCODE_URL} className="underline font-bold">
               आजचे शब्दक{' '}
             </a>{' '}
@@ -273,7 +311,7 @@ function App() {
         )}
 
         {wordSource === 'Random' ? (
-          <h1 className="text-2xl grow font-bold dark:text-white ml-3 bg-green-300 dark:bg-green-900 border-green-600 border-b p-4 m-4 rounded">
+          <h1 className="text-xl grow font-bold dark:text-white bg-green-300 dark:bg-green-900 border-green-600 p-2 rounded">
             <a href={GAME_ENCODE_URL_RANDOM} className="underline font-bold">
               सराव शब्दक{' '}
             </a>{' '}
@@ -287,7 +325,7 @@ function App() {
         )}
       </div>
       <hr />
-      <div />
+      <div className="mt-1" />
       <Grid guesses={guesses} currentGuess={currentGuess} onChar={onChar} />
       <Keyboard
         onChar={onChar}
@@ -295,6 +333,34 @@ function App() {
         onEnter={onEnter}
         guesses={guesses}
       />
+      <hr />
+      <div className="text-center py-1 mt-1 space-x-1">
+        {/* <h3 className="text-lg font-sans text-black">Create groups of 4!</h3> */}
+        <h3 className="text-lg font-bold font-sans text-black dark:text-white">
+          शब्दक संग्रहातून
+        </h3>
+        <div className="text-center flex justify-center mt-2 space-x-2">
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            minDate={new Date('2023-12-01')}
+            maxDate={new Date()}
+            dateFormat="MMMM dd, yyyy"
+            className="p-2 rounded-2xl border-1 border-gray-500 dark:border-gray-50 text-center bg-gray-300 dark:bg-gray-100"
+          />
+        </div>
+        <div className="flex justify-center mt-2 space-x-2">
+          <button
+            className={
+              'px-4 py-2 rounded-3xl mb-2 bg-gray-500 dark:bg-gray-50 text-white dark:text-black'
+            }
+          >
+            <a href={navigationLink()} rel="noopener noreferrer">
+              खेळा
+            </a>
+          </button>
+        </div>
+      </div>
       <InfoModal
         isOpen={isInfoModalOpen}
         handleClose={() => setIsInfoModalOpen(false)}

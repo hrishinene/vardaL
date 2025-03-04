@@ -13,8 +13,8 @@ import {MAX_CHALLENGES} from '../constants/settings'
 export const shareStatus = (guesses: string[], lost: boolean) => {
     let encodedUrl = getEncodedUrl(GAME_ENCODE_URL);
     let msg = lost? "मी प्रयत्न केलेले शब्दक:" : "मी सोडवलेले शब्दक:";
-    let text = `${GAME_TITLE} (${solutionIndex}) ${lost ? 'X' : guesses.length}/${MAX_CHALLENGES}\n\n` +
-        generateEmojiGrid2(guesses) + `\n\n` + GAME_URL +  `\n\n` + msg + `\n` + encodedUrl;
+    let text = `${GAME_TITLE} #(${solutionIndex})\n` +
+        generateEmojiGrid2(guesses) + `\n[ ` + encodedUrl + ` ]\n\n` + GAME_URL;
 
     // console.log("message", text);
     navigator.clipboard.writeText(text).then(r => {
