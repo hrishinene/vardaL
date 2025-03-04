@@ -11,6 +11,7 @@ import {
   CORRECT_WORD_MESSAGE,
   GAME_COPIED_MESSAGE,
   GAME_ENCODE_URL,
+  GAME_FULL_URL,
   GAME_TITLE,
   GAME_URL,
   NOT_ENOUGH_LETTERS_MESSAGE,
@@ -250,7 +251,7 @@ function App() {
         {/* center-aligned div */}
         <div className="flex-1 flex-col justify-center items-center pb-2 text-center">
           <h1 className="text-5xl font-bold dark:text-white text-center">
-            <a href={GAME_URL} rel="noopener noreferrer">
+            <a href={GAME_FULL_URL} rel="noopener noreferrer">
               {GAME_TITLE}
             </a>
           </h1>
