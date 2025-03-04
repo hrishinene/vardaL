@@ -24,6 +24,7 @@ import {
   GAME_ENCODE_URL_RANDOM,
   GAME_SHABDAK_1_URL,
   GAME_URL,
+  GAME_FULL_URL,
 } from './constants/strings'
 import { MAX_WORD_LENGTH, MAX_CHALLENGES } from './constants/settings'
 import {
@@ -255,7 +256,7 @@ function App() {
         {/* center-aligned div */}
         <div className="flex-1 flex-col justify-center items-center pb-4 text-center">
           <h1 className="text-5xl font-bold dark:text-white text-center">
-            <a href={GAME_URL} rel="noopener noreferrer">
+            <a href={GAME_FULL_URL} rel="noopener noreferrer">
               {GAME_TITLE}
             </a>
           </h1>
