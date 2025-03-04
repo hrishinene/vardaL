@@ -78,7 +78,7 @@ export const StatsModal = ({
           </div>
           <button
             type="button"
-            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
             onClick={() => {
               shareStatus(guesses, isGameLost)
               handleShare()
@@ -88,21 +88,33 @@ export const StatsModal = ({
           </button>
           <button
             type="button"
-            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm mb-4"
+            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm mb-4"
           >
             <a href={FORM_LINK} rel="noopener noreferrer"> तुमची प्रतिक्रिया? </a>
           </button>
         </div>
       )}
-      <hr className="border-solid border-t-2 border-slate-500 mb-2" />
-      <p className="text-gray-800 dark:text-gray-400 text-center justify-items-center">
-        हे खेळही नक्की खेळून पहा:
+      <hr/>
+      <p className="text-gray-800 dark:text-gray-100 text-center">
+        खेळून पहा:
       </p>
-      <ul className="list-none">
-        <li><a href="http://www.shabdak.com" className="text-l underline decoration-indigo-500  dark:text-gray-300 decoration-2">लोकप्रिय जोडाक्षरी शब्दक-३</a></li>
-        <li><a href="http://shabdabandha.shabdak.com" className="text-l underline decoration-indigo-500  dark:text-gray-300 decoration-2">मनोरंजक बहुरंगी शब्दबंध</a></li>
-      </ul>
+      <div className="mt-1 sm:mt-1 columns-1 dark:text-white">
+      <div className="flex space-x-4">
 
+      <button
+            type="button"
+            className="mt-2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm mb-1"
+          >
+            <a href="http://www.shabdak.com" rel="noopener noreferrer">लोकप्रिय जोडाक्षरी शब्दक-३</a>
+      </button>
+      <button
+            type="button"
+            className="mt-2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm mb-1"
+          >
+            <a href="http://shabdabandha.shabdak.com"rel="noopener noreferrer">मनोरंजक बहुरंगी शब्दबंध</a>
+      </button>
+      </div>
+      </div>
     </BaseModal>
   )
 }

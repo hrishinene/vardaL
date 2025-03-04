@@ -10,7 +10,9 @@ import {
   BINGO_MESSAGE,
   CORRECT_WORD_MESSAGE,
   GAME_COPIED_MESSAGE,
+  GAME_ENCODE_URL,
   GAME_TITLE,
+  GAME_URL,
   NOT_ENOUGH_LETTERS_MESSAGE,
   SOS_MESSAGE,
   WIN_MESSAGES,
@@ -31,6 +33,8 @@ import {
 } from '@heroicons/react/solid'
 import { syllables } from './lib/devStrUtils'
 import { AppMenu } from './components/menu/Menu'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const ALERT_TIME_MS = 3000
 
@@ -44,6 +48,53 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
+
+  // Game Date begin
+  // Manage Date and Archive
+  const [gameDate, setGameDate] = useState<Date>(() => {
+    // Check if the date is in the future
+    const url = new URL(window.location.href)
+    var todayDate = new Date()
+    var todayParam = url.searchParams.get('today')
+    if (todayParam) todayDate = new Date(todayParam + 'T00:00:00')
+
+    // console.log("todayDate: " + todayDate)
+
+    return todayDate
+  })
+
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    return gameDate
+  })
+
+  const localFormatDate = (date: Date): string => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  const getDateUrl = (baseUrl: string, date: Date): string => {
+    let encoded = baseUrl + '?today=' + localFormatDate(date)
+    return encoded
+  }
+
+  const handleDateChange = (
+    date: Date | null,
+    event?: React.SyntheticEvent
+  ) => {
+    // console.log(date)
+    if (date) {
+      setSelectedDate(date)
+    }
+  }
+
+  const navigationLink = () => {
+    // console.log("navigate to archive game dated: " + selectedDate)
+    return getDateUrl(GAME_ENCODE_URL, selectedDate)
+  }
+
+  // --- Game Date over ---
 
   const showAboutModalOnLoad = (): boolean => {
     let lastDate = localStorage.getItem(aboutModalLast)
@@ -190,12 +241,30 @@ function App() {
   }
 
   return (
-    <div className="w-full absolute flex flex-col overflow-hidden h-full">
+    // <div className="w-full absolute flex-col overflow-hidden h-full">
+    // Make it similar to Shabdak3 so as to fit the Archive
+    <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div className="flex container mt-2">
         <AppMenu dark={isDarkMode} />
-        <h1 className="text-3xl ml-4 grow font-bold dark:text-white text-center">
-          {GAME_TITLE}
-        </h1>
+
+        {/* center-aligned div */}
+        <div className="flex-1 flex-col justify-center items-center pb-2 text-center">
+          <h1 className="text-5xl font-bold dark:text-white text-center">
+            <a href={GAME_URL} rel="noopener noreferrer">
+              {GAME_TITLE}
+            </a>
+          </h1>
+          <div>
+            <span className="mt-2 text-2xl text-black dark:text-white">
+              {gameDate.toLocaleDateString('mr-IN', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+          </div>
+        </div>
+
         <div className="flex justify-items-end">
           {isDarkMode ? (
             <SunIcon
@@ -230,6 +299,34 @@ function App() {
         onEnter={onEnter}
         guesses={guesses}
       />
+      <hr />
+      <div className="text-center py-1 mt-1 space-x-1">
+        {/* <h3 className="text-lg font-sans text-black">Create groups of 4!</h3> */}
+        <h3 className="text-lg font-bold font-sans text-black dark:text-white">
+          शब्दक-१ संग्रहातून
+        </h3>
+        <div className="text-center flex justify-center mt-2 space-x-2">
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            minDate={new Date('2024-12-01')}
+            maxDate={new Date()}
+            dateFormat="MMMM dd, yyyy"
+            className="p-2 rounded-2xl border-1 border-gray-500 dark:border-gray-50 text-center bg-gray-300 dark:bg-gray-100"
+          />
+        </div>
+        <div className="flex justify-center mt-2 space-x-2">
+          <button
+            className={
+              'px-4 py-2 rounded-3xl mb-2 bg-gray-500 dark:bg-gray-50 text-white dark:text-black'
+            }
+          >
+            <a href={navigationLink()} rel="noopener noreferrer">
+              खेळा
+            </a>
+          </button>
+        </div>
+      </div>
       <InfoModal
         isOpen={isInfoModalOpen}
         handleClose={() => setIsInfoModalOpen(false)}

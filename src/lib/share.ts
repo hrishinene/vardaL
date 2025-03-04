@@ -12,9 +12,10 @@ import {syllables} from "./devStrUtils";
 // }
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
-    let text = `${GAME_TITLE} ${solutionIndex} ${lost ? 'X' : guesses.length}/${MAX_CHALLENGES}\n\n` +
+    // let text = `${GAME_TITLE} ${solutionIndex} ${lost ? 'X' : guesses.length}/${MAX_CHALLENGES}\n` +
+    let text = `${GAME_TITLE} #${solutionIndex}\n` +
         generateEmojiGrid(guesses) +
-        `\n\n${GAME_URL} `;
+        `\n${GAME_URL} `;
     navigator.clipboard.writeText(text).then(r => {
         // ignore for now
     })
@@ -39,7 +40,7 @@ export const generateEmojiGrid = (guesses: string[]) => {
                     switch (status[i]) {
                         case 'correct':
                             // return '🟦'
-                            return '🟩'
+                            return '✅'
                         case 'present':
                             // return '🟧'
                             return '🟨'

@@ -22,9 +22,32 @@ const generateRandomPastDate = (): number => { // thanks to https://stackoverflo
     return new Date(fromTime + Math.random() * (toTime - fromTime)).valueOf();
 }
 
+export function findDaysDifference(start : Date, end : Date) : number {
+    const normalizedStart = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    const normalizedEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+    var days = Math.round((normalizedEnd.getTime() - normalizedStart.getTime()) / (1000 * 60 * 60 * 24));
+    return days;
+  }
+  
+  export function findDaysDifferenceFromToday(date : Date) : number {
+    return findDaysDifference(new Date(), date);
+  }
+  
 export const getWordOfDay = () => {
+    const url = new URL(window.location.href);
+
     // January 1, 2022 Game Epoch
-    const now = Date.now()
+    var todayDate = new Date();
+    var todayParam = url.searchParams.get("today");
+    if (todayParam) {
+      todayDate = new Date(todayParam+"T00:00:00"); // Convert to Local
+      // don't allow future dates
+
+      if (findDaysDifference(todayDate, new Date()) < 0)
+        todayDate = new Date();
+    }
+
+    const now = todayDate.getTime() // Date.now()
     const msInDay = 86400000
     const today = Math.floor((now - epochMs) / msInDay)
     const nextday = (today + 1) * msInDay + epochMs

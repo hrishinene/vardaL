@@ -12,7 +12,7 @@ export const CompletedRow = ({ guess }: Props) => {
   return (
     <div className="flex justify-center mb-1">
       {syllables(guess).map((letter, i) => (
-        <Cell key={i} value={letter} status={statuses[i]} />
+        <Cell key={i} value={letter} status={statuses[i]} size='small'/>
       ))}
     </div>
   )

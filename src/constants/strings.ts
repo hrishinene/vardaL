@@ -5,6 +5,9 @@ export const GAME_TITLE = 'शब्दक-१'
 // export const GAME_SUBTITLE = GitInfo().branch?.toLowerCase() === 'prod'? '' : 'beta'
 export const GAME_VERSION = GitInfo().commit.shortHash || 'unknown'
 export const GAME_URL = 'shabdak1.shabdak.com'  // TODO #17
+export const GAME_ENCODE_URL = 'https://shabdak2.el.r.appspot.com'
+// export const GAME_ENCODE_URL = 'https://localhost:3000' // TEST
+
 export const WIN_MESSAGES = ['फारच छान, हा शब्द लगेच आला!', 'अरे वा! मस्त!', 'उत्तम, पण थोडा वेळ लागला का?']
 export const GAME_COPIED_MESSAGE = 'आता व्हॉट्सॅप् वर पेस्ट करा'
 export const ABOUT_GAME_MESSAGE = `रसिकहो, नमस्कार!`
