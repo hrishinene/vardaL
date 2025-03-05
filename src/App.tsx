@@ -241,6 +241,15 @@ function App() {
     }
   }
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { target } = e
+
+    if (target) {
+      target.readOnly = true // -------> this for all others
+      target.blur() //  ------> this for ios iphone, TV Browsers, Ipad, Safari
+    }
+  }
+
   return (
     // <div className="w-full absolute flex-col overflow-hidden h-full">
     // Make it similar to Shabdak3 so as to fit the Archive
@@ -310,9 +319,14 @@ function App() {
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
-            minDate={new Date('2024-12-01')}
+            minDate={new Date('2023-12-01')}
             maxDate={new Date()}
             dateFormat="MMMM dd, yyyy"
+            disabledKeyboardNavigation={false}
+            onFocus={handleFocus}
+            onKeyDown={(e) => {
+              e.preventDefault()
+            }}
             className="p-2 rounded-2xl border-1 border-gray-500 dark:border-gray-50 text-center bg-gray-300 dark:bg-gray-100"
           />
         </div>
